@@ -1,135 +1,122 @@
-# Turborepo starter
+# Agency Monorepo
 
-This Turborepo starter is maintained by the Turborepo core team.
+A Turborepo monorepo for quickly generating client NextJS applications with a consistent tech stack and shared configurations.
 
-## Using this example
+## Tech Stack
 
-Run the following command:
+Each client app includes:
+- **NextJS 15** with App Router and TypeScript
+- **Tailwind CSS v4** for styling
+- **Next Intl** for internationalization (en, es, fr)
+- **Payload CMS** for content management
+- **Shared ESLint and TypeScript configurations**
 
-```sh
-npx create-turbo@latest
-```
+## Quick Start
 
-## What's inside?
+1. **Install dependencies**:
+   ```bash
+   pnpm install
+   ```
 
-This Turborepo includes the following packages/apps:
+2. **Create a new client app**:
+   ```bash
+   pnpm create-client my-project-name
+   ```
 
-### Apps and Packages
+3. **Start development**:
+   ```bash
+   pnpm dev
+   # or for specific app:
+   pnpm dev --filter=my-project-name
+   ```
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
+## Project Structure
 
 ```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+/
+├── apps/
+│   ├── template-app/         # Base template for new client apps
+│   └── [project-name]/       # Your client apps
+├── packages/
+│   ├── @agency/eslint-config    # Shared ESLint rules
+│   ├── @agency/typescript-config # Shared TypeScript configs
+│   ├── @agency/ui               # Shared UI components
+│   └── @agency/shared-utils     # Common utilities
+└── scripts/
+    └── create-client-app.js     # Client app generation script
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+## Available Commands
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+- `pnpm dev` - Start all apps in development mode
+- `pnpm build` - Build all apps and packages
+- `pnpm lint` - Lint all packages
+- `pnpm check-types` - Type check all packages
+- `pnpm format` - Format code with Prettier
+- `pnpm create-client <name>` - Generate new client app
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+## Creating Client Apps
 
-### Develop
+The `create-client` script copies the template app and sets up a new project:
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+```bash
+pnpm create-client acme-corp
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+This creates `apps/acme-corp/` with:
+- Pre-configured NextJS app
+- Shared ESLint and TypeScript configs
+- Next Intl setup with sample translations
+- Payload CMS configuration
+- Environment file template
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
+## Client App Setup
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
+After creating a new client app:
 
-### Remote Caching
+1. **Configure environment**:
+   ```bash
+   cd apps/your-project-name
+   cp .env.example .env
+   # Edit .env with your specific settings
+   ```
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+2. **Set up database for Payload CMS**:
+   - Configure your database connection in `.env`
+   - Update `payload.config.ts` as needed
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+3. **Customize branding**:
+   - Update translations in `messages/`
+   - Customize Tailwind styles
+   - Add client-specific assets
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+4. **Start development**:
+   ```bash
+   # From monorepo root
+   pnpm dev --filter=your-project-name
+   ```
 
-```
-cd my-turborepo
+## Shared Packages
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
+### @agency/eslint-config
+Provides consistent linting rules across all apps:
+- NextJS and React best practices
+- TypeScript support
+- Prettier integration
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
+### @agency/typescript-config
+Base TypeScript configurations:
+- `base.json` - Standard config
+- `nextjs.json` - NextJS-specific settings
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+### @agency/shared-utils
+Common utilities (expand as needed):
+- Currently minimal, ready for growth
+- Add shared functions, constants, types
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+## Development Tips
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+- Use `--filter` flag to work on specific apps: `pnpm dev --filter=client-name`
+- Shared packages are automatically linked across the monorepo
+- Changes to shared packages trigger rebuilds in dependent apps
+- Each app maintains its own Tailwind and Payload configurations
