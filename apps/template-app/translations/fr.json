@@ -1,0 +1,6 @@
+{
+  "HomePage": {
+    "title": "Bienvenue dans votre modèle d'agence",
+    "description": "Il s'agit d'un modèle NextJS avec TypeScript, Tailwind CSS, Next Intl et Payload CMS"
+  }
+}

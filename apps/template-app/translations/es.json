@@ -1,0 +1,6 @@
+{
+  "HomePage": {
+    "title": "Bienvenido a tu plantilla de agencia",
+    "description": "Esta es una plantilla de NextJS con TypeScript, Tailwind CSS, Next Intl y Payload CMS"
+  }
+}
