@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celine Wanyi - Animated Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #0d0d0d;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 107, 107, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 107, 107, 0.2);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.3s ease;
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0d0d0d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader-text {
+            font-family: 'Georgia', serif;
+            font-size: 3rem;
+            color: #ff6b6b;
+            opacity: 0;
+            animation: fadeInOut 2s ease-in-out infinite;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Hero Section - Cinematic */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(ellipse at center, #1a1a1a 0%, #0d0d0d 100%);
+            overflow: hidden;
+        }
+
+        .hero-bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            filter: blur(2px);
+        }
+
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/53e5ea32-370c-4417-b9b8-c9c90aa8dff9/CW2.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            animation: parallaxFloat 20s ease-in-out infinite;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 3;
+            max-width: 900px;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .hero-intro {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: slideUp 1s ease-out 1s both;
+        }
+
+        .hero-name {
+            font-family: 'Georgia', serif;
+            font-size: 6rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #ffffff, #ff6b6b, #ffffff);
+            background-size: 200% 200%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 4s ease-in-out infinite, slideUp 1s ease-out 0.5s both;
+            text-shadow: 0 0 30px rgba(255, 107, 107, 0.3);
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: slideUp 1s ease-out 1.5s both;
+            font-style: italic;
+        }
+
+        .music-player {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 2rem;
+            max-width: 500px;
+            margin: 0 auto;
+            opacity: 0;
+            animation: slideUp 1s ease-out 2s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .music-player::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 107, 107, 0.1), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        .now-playing {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .track-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .track-artist {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .play-button {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #ff6b6b;
+            border-radius: 50%;
+            background: transparent;
+            color: #ff6b6b;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .play-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #ff6b6b;
+            transition: left 0.3s ease;
+        }
+
+        .play-button:hover::before {
+            left: 0;
+        }
+
+        .play-button:hover {
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-note {
+            position: absolute;
+            color: rgba(255, 107, 107, 0.3);
+            font-size: 2rem;
+            animation: floatUpDown 6s ease-in-out infinite;
+        }
+
+        .note-1 {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .note-2 {
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .note-3 {
+            top: 80%;
+            left: 80%;
+            animation-delay: 4s;
+        }
+
+        /* Biography - Morphing Layout */
+        .biography {
+            min-height: 100vh;
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 50%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bio-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Georgia', serif;
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: #ff6b6b;
+            position: relative;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 1s ease;
+        }
+
+        .section-title.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #ff5252);
+            transition: width 1s ease 0.5s;
+        }
+
+        .section-title.animate::after {
+            width: 150px;
+        }
+
+        .bio-morphing {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 4rem;
+        }
+
+        .bio-text {
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 1s ease;
+        }
+
+        .bio-text.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .bio-paragraph {
+            font-size: 1.3rem;
+            line-height: 2;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .bio-paragraph::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 3rem;
+            color: #ff6b6b;
+            opacity: 0.5;
+            font-family: 'Georgia', serif;
+        }
+
+        .bio-visual {
+            position: relative;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 1s ease 0.3s;
+        }
+
+        .bio-visual.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .bio-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 30px;
+            transition: all 0.5s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .bio-image:hover {
+            transform: scale(1.03) rotate(1deg);
+            box-shadow: 0 30px 80px rgba(255, 107, 107, 0.3);
+        }
+
+        .bio-shape {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 107, 107, 0.1);
+            border-radius: 50%;
+            z-index: 1;
+            animation: morphShape 8s ease-in-out infinite;
+        }
+
+        /* Gallery - Masonry with Animations */
+        .gallery {
+            padding: 8rem 2rem;
+            background: #0d0d0d;
+            position: relative;
+        }
+
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-masonry {
+            columns: 3;
+            column-gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 2rem;
+            position: relative;
+            border-radius: 25px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+            transition: all 0.8s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item.animate {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            z-index: 10;
+        }
+
+        .gallery-image {
+            width: 100%;
+            display: block;
+            transition: all 0.5s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 107, 107, 0.9), rgba(255, 107, 107, 0.4));
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+            filter: brightness(0.7);
+        }
+
+        .overlay-text {
+            color: white;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .overlay-subtext {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+        }
+
+        /* Press - Sliding Cards */
+        .press {
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .press-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .press-slider {
+            display: flex;
+            gap: 2rem;
+            margin-top: 4rem;
+            animation: slideInfinite 20s linear infinite;
+        }
+
+        .press-card {
+            min-width: 350px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 3rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .press-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 107, 107, 0.1), transparent);
+            border-radius: 25px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .press-card:hover::before {
+            opacity: 1;
+        }
+
+        .press-card:hover {
+            transform: translateY(-15px);
+            border-color: rgba(255, 107, 107, 0.4);
+            box-shadow: 0 25px 60px rgba(255, 107, 107, 0.2);
+        }
+
+        .press-logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #ff6b6b;
+            margin-bottom: 1.5rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .press-quote {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            font-style: italic;
+            position: relative;
+            padding: 0 1rem;
+        }
+
+        .press-quote::before,
+        .press-quote::after {
+            content: '"';
+            font-size: 3rem;
+            color: #ff6b6b;
+            opacity: 0.5;
+            position: absolute;
+            font-family: 'Georgia', serif;
+        }
+
+        .press-quote::before {
+            top: -10px;
+            left: -10px;
+        }
+
+        .press-quote::after {
+            bottom: -20px;
+            right: -10px;
+        }
+
+        /* Newsletter - Glowing Form */
+        .newsletter {
+            padding: 8rem 2rem;
+            background: radial-gradient(ellipse at center, #1a1a1a 0%, #0d0d0d 100%);
+            text-align: center;
+            position: relative;
+        }
+
+        .newsletter-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .newsletter-form {
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .newsletter-input {
+            width: 100%;
+            padding: 2rem 3rem;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 70px;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            box-shadow: 0 0 40px rgba(255, 107, 107, 0.4);
+            transform: scale(1.02);
+        }
+
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .newsletter-btn {
+            width: 100%;
+            padding: 2rem;
+            background: linear-gradient(135deg, #ff6b6b, #ff5252);
+            border: none;
+            border-radius: 70px;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .newsletter-btn:hover::before {
+            left: 100%;
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Footer - Animated Social Grid */
+        .footer {
+            padding: 8rem 2rem 3rem;
+            background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/921d8a47-c1e8-40a7-b065-fc3a112c88da/CW+WAIWY+PRESS+PIC+1.jpeg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.05;
+            filter: blur(5px);
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-constellation {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        .social-planet {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 2.5rem;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .social-planet::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(from 0deg, rgba(255, 107, 107, 0.1), transparent, rgba(255, 107, 107, 0.1));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .social-planet:hover::before {
+            opacity: 1;
+            animation: rotate 3s linear infinite;
+        }
+
+        .social-planet:hover {
+            transform: translateY(-10px) scale(1.05);
+            border-color: rgba(255, 107, 107, 0.4);
+            box-shadow: 0 20px 60px rgba(255, 107, 107, 0.2);
+        }
+
+        .social-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .social-planet:hover .social-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .social-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #ff6b6b;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-handle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+
+        .contact-section {
+            margin-top: 5rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-email {
+            display: inline-block;
+            font-size: 1.8rem;
+            color: #ff6b6b;
+            text-decoration: none;
+            padding: 1.5rem 3rem;
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            border-radius: 60px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-email::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 107, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .contact-email:hover::before {
+            left: 100%;
+        }
+
+        .contact-email:hover {
+            background: rgba(255, 107, 107, 0.1);
+            transform: scale(1.05);
+        }
+
+        /* Animations */
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes parallaxFloat {
+            0%, 100% { transform: scale(1) translateY(0px); }
+            50% { transform: scale(1.05) translateY(-20px); }
+        }
+
+        @keyframes floatUpDown {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        @keyframes morphShape {
+            0%, 100% { border-radius: 50%; transform: rotate(0deg); }
+            25% { border-radius: 25% 75%; transform: rotate(90deg); }
+            50% { border-radius: 75% 25%; transform: rotate(180deg); }
+            75% { border-radius: 40% 60%; transform: rotate(270deg); }
+        }
+
+        @keyframes slideInfinite {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.1; }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .gallery-masonry {
+                columns: 2;
+            }
+
+            .hero-name {
+                font-size: 4.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-name {
+                font-size: 3.5rem;
+            }
+
+            .bio-morphing {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .gallery-masonry {
+                columns: 1;
+            }
+
+            .press-slider {
+                animation-duration: 30s;
+            }
+
+            .press-card {
+                min-width: 280px;
+            }
+
+            .section-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-name {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .social-constellation {
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-text">Celine Wanyi</div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-image"></div>
+        <div class="floating-elements">
+            <div class="floating-note note-1">♪</div>
+            <div class="floating-note note-2">♫</div>
+            <div class="floating-note note-3">♪</div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-intro">New Musical Experience</div>
+            <h1 class="hero-name">Celine Wanyi</h1>
+            <div class="hero-tagline">Where tradition meets innovation</div>
+            <div class="music-player">
+                <div class="now-playing">Now Playing</div>
+                <div class="track-title">Latest Release</div>
+                <div class="track-artist">Celine Wanyi</div>
+                <button class="play-button">▶</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Biography -->
+    <section class="biography">
+        <div class="bio-container">
+            <h2 class="section-title">The Artist</h2>
+            <div class="bio-morphing">
+                <div class="bio-text">
+                    <div class="bio-paragraph">
+                        Celine Wanyi represents the voice of a new generation - one that seamlessly bridges cultural heritage with contemporary artistic expression.
+                    </div>
+                    <div class="bio-paragraph">
+                        Her work transcends traditional boundaries, creating immersive experiences that speak to both the heart and mind, resonating across diverse audiences worldwide.
+                    </div>
+                    <div class="bio-paragraph">
+                        Through her unique artistic lens, she crafts narratives that are both deeply personal and universally relatable, establishing her as a distinctive voice in today's creative landscape.
+                    </div>
+                </div>
+                <div class="bio-visual">
+                    <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/4477d9e6-194d-4b6f-8aca-eec5d12c76eb/CW+WAIWY+PRESS+PIC+5.jpeg?format=1000w" alt="Celine Wanyi" class="bio-image">
+                    <div class="bio-shape"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery">
+        <div class="gallery-container">
+            <h2 class="section-title">Visual Stories</h2>
+            <div class="gallery-masonry">
+                <div class="gallery-item">
+                    <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/53e5ea32-370c-4417-b9b8-c9c90aa8dff9/CW2.jpg" alt="Portrait 1" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="overlay-text">Artist Portrait</div>
+                        <div class="overlay-subtext">Contemporary Expression</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/4477d9e6-194d-4b6f-8aca-eec5d12c76eb/CW+WAIWY+PRESS+PIC+5.jpeg?format=1000w" alt="Portrait 2" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="overlay-text">Press Photo</div>
+                        <div class="overlay-subtext">Professional Portfolio</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/921d8a47-c1e8-40a7-b065-fc3a112c88da/CW+WAIWY+PRESS+PIC+1.jpeg" alt="Performance" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="overlay-text">Live Performance</div>
+                        <div class="overlay-subtext">Artistic Connection</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/53e5ea32-370c-4417-b9b8-c9c90aa8dff9/CW2.jpg" alt="Studio" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="overlay-text">Behind the Scenes</div>
+                        <div class="overlay-subtext">Creative Process</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/4477d9e6-194d-4b6f-8aca-eec5d12c76eb/CW+WAIWY+PRESS+PIC+5.jpeg?format=1000w" alt="Artistic" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <div class="overlay-text">Artistic Vision</div>
+                        <div class="overlay-subtext">Cultural Bridge</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Press -->
+    <section class="press">
+        <div class="press-container">
+            <h2 class="section-title">Critical Acclaim</h2>
+            <div class="press-slider">
+                <div class="press-card">
+                    <div class="press-logo">Music Magazine</div>
+                    <div class="press-quote">A breakthrough artist who redefines the boundaries between traditional and contemporary musical expression.</div>
+                </div>
+                <div class="press-card">
+                    <div class="press-logo">Cultural Review</div>
+                    <div class="press-quote">Celine Wanyi creates immersive artistic experiences that resonate deeply across cultural and generational lines.</div>
+                </div>
+                <div class="press-card">
+                    <div class="press-logo">Art & Sound</div>
+                    <div class="press-quote">Her innovative approach to blending heritage with modernity establishes her as a distinctive voice in contemporary art.</div>
+                </div>
+                <div class="press-card">
+                    <div class="press-logo">New Voices</div>
+                    <div class="press-quote">A visionary artist whose work transcends traditional boundaries and speaks to universal human experiences.</div>
+                </div>
+                <div class="press-card">
+                    <div class="press-logo">Creative Today</div>
+                    <div class="press-quote">Wanyi's artistic lens crafts narratives that are both deeply personal and universally relatable.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="newsletter-glow"></div>
+        <div class="newsletter-content">
+            <h2 class="section-title">Join the Journey</h2>
+            <p>Be part of the artistic journey. Get exclusive access to new releases, behind-the-scenes content, and intimate performances.</p>
+            <form class="newsletter-form">
+                <div class="form-group">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email to begin" required>
+                </div>
+                <button type="submit" class="newsletter-btn">Enter the Experience</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bg"></div>
+        <div class="footer-content">
+            <h2 class="section-title">Connect & Create</h2>
+            <div class="social-constellation">
+                <div class="social-planet">
+                    <span class="social-icon">📸</span>
+                    <div class="social-name">Instagram</div>
+                    <div class="social-handle">@celinewanyi</div>
+                </div>
+                <div class="social-planet">
+                    <span class="social-icon">🎵</span>
+                    <div class="social-name">Spotify</div>
+                    <div class="social-handle">Celine Wanyi</div>
+                </div>
+                <div class="social-planet">
+                    <span class="social-icon">📺</span>
+                    <div class="social-name">YouTube</div>
+                    <div class="social-handle">Celine Wanyi</div>
+                </div>
+                <div class="social-planet">
+                    <span class="social-icon">🐦</span>
+                    <div class="social-name">Twitter</div>
+                    <div class="social-handle">@celinewanyi</div>
+                </div>
+            </div>
+            <div class="contact-section">
+                <a href="mailto:contact@celinewanyi.com" class="contact-email">contact@celinewanyi.com</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 2000);
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Interactive elements cursor effects
+        document.querySelectorAll('button, a, .gallery-item, .social-planet').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(2)';
+                cursorFollower.style.transform = 'scale(1.5)';
+            });
+
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursorFollower.style.transform = 'scale(1)';
+            });
+        });
+
+        // Scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const animateOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.section-title, .bio-text, .bio-visual').forEach(el => {
+            animateOnScroll.observe(el);
+        });
+
+        // Gallery staggered animation
+        const galleryObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('animate');
+                    }, index * 200);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            galleryObserver.observe(item);
+        });
+
+        // Music player interaction
+        document.querySelector('.play-button').addEventListener('click', function() {
+            if (this.textContent === '▶') {
+                this.textContent = '⏸';
+                this.style.background = '#ff6b6b';
+                this.style.color = 'white';
+            } else {
+                this.textContent = '▶';
+                this.style.background = 'transparent';
+                this.style.color = '#ff6b6b';
+            }
+        });
+
+        // Newsletter form animation
+        document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('.newsletter-btn');
+            const input = e.target.querySelector('.newsletter-input');
+            
+            btn.innerHTML = 'Welcome to the Journey!';
+            btn.style.background = 'linear-gradient(135deg, #4caf50, #45a049)';
+            input.style.borderColor = '#4caf50';
+            input.style.boxShadow = '0 0 40px rgba(76, 175, 80, 0.4)';
+            
+            setTimeout(() => {
+                btn.innerHTML = 'Enter the Experience';
+                btn.style.background = 'linear-gradient(135deg, #ff6b6b, #ff5252)';
+                input.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                input.style.boxShadow = 'none';
+                input.value = '';
+            }, 3000);
+        });
+
+        // Parallax effect for hero background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroBackground = document.querySelector('.hero-bg-image');
+            heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+
+        // Press slider pause on hover
+        const pressSlider = document.querySelector('.press-slider');
+        pressSlider.addEventListener('mouseenter', () => {
+            pressSlider.style.animationPlayState = 'paused';
+        });
+
+        pressSlider.addEventListener('mouseleave', () => {
+            pressSlider.style.animationPlayState = 'running';
+        });
+
+        // Social planets interaction
+        document.querySelectorAll('.social-planet').forEach(planet => {
+            planet.addEventListener('click', () => {
+                planet.style.transform = 'translateY(-15px) scale(1.1)';
+                setTimeout(() => {
+                    planet.style.transform = 'translateY(-10px) scale(1.05)';
+                }, 200);
+            });
+        });
+
+        // Random floating animation for notes
+        document.querySelectorAll('.floating-note').forEach(note => {
+            setInterval(() => {
+                const randomX = Math.random() * 100;
+                const randomY = Math.random() * 100;
+                note.style.left = randomX + '%';
+                note.style.top = randomY + '%';
+            }, 8000);
+        });
+    </script>
+</body>
+</html>

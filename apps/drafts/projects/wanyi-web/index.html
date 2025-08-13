@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celine Wanyi - Design Variations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 48px;
+            font-weight: 100;
+            letter-spacing: -2px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #999;
+            margin-bottom: 50px;
+            font-weight: 300;
+        }
+        
+        .round-section {
+            margin-bottom: 60px;
+        }
+        
+        h2 {
+            font-size: 24px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: #ccc;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+        
+        .variations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .variation-card {
+            background: #111;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .variation-card:hover {
+            border-color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+        }
+        
+        .variation-card a {
+            display: block;
+            padding: 30px;
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .variation-number {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .variation-name {
+            font-size: 20px;
+            font-weight: 300;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+        
+        .variation-description {
+            font-size: 14px;
+            color: #999;
+            line-height: 1.6;
+        }
+        
+        .approach-label {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #222;
+            padding: 8px 15px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+        }
+        
+        .base-design {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border: 2px solid #444;
+            margin-bottom: 40px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .base-design h3 {
+            font-size: 28px;
+            font-weight: 200;
+            margin-bottom: 15px;
+        }
+        
+        .base-design p {
+            color: #999;
+            font-size: 16px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+            
+            .variations-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Celine Wanyi</h1>
+        <p class="subtitle">Landing Page Design Variations • Round 2</p>
+        
+        <div class="round-section">
+            <div class="base-design">
+                <h3>Base Design</h3>
+                <p>No base design selected yet. Review the variations below to choose your preferred direction.</p>
+            </div>
+            
+            <h2>Round 2 Variations (Latest)</h2>
+            
+            <div class="variations-grid">
+                <div class="variation-card">
+                    <span class="approach-label">Immersive</span>
+                    <a href="round-2/variation-1-immersive-hero.html" target="_blank">
+                        <div class="variation-number">Variation 01</div>
+                        <div class="variation-name">Immersive Hero</div>
+                        <div class="variation-description">Full-screen hero with animated zoom, Playfair Display serif, glass morphism effects</div>
+                    </a>
+                </div>
+                
+                <div class="variation-card">
+                    <span class="approach-label">Immersive</span>
+                    <a href="round-2/variation-2-parallax-story.html" target="_blank">
+                        <div class="variation-number">Variation 02</div>
+                        <div class="variation-name">Parallax Story</div>
+                        <div class="variation-description">Advanced parallax scrolling, Bodoni Moda typography, cinematic text animations</div>
+                    </a>
+                </div>
+                
+                <div class="variation-card">
+                    <span class="approach-label">Immersive</span>
+                    <a href="round-2/variation-3-cinematic-scroll.html" target="_blank">
+                        <div class="variation-number">Variation 03</div>
+                        <div class="variation-name">Cinematic Scroll</div>
+                        <div class="variation-description">Custom cursor, Didot serif, letterbox borders, film-inspired composition</div>
+                    </a>
+                </div>
+                
+                <div class="variation-card">
+                    <span class="approach-label">Dynamic</span>
+                    <a href="round-2/variation-4-dynamic-grid.html" target="_blank">
+                        <div class="variation-number">Variation 04</div>
+                        <div class="variation-name">Dynamic Grid</div>
+                        <div class="variation-description">Morphing CSS grid, particle animations, Georgia serif, glowing text effects</div>
+                    </a>
+                </div>
+                
+                <div class="variation-card">
+                    <span class="approach-label">Dynamic</span>
+                    <a href="round-2/variation-5-interactive-journey.html" target="_blank">
+                        <div class="variation-number">Variation 05</div>
+                        <div class="variation-name">Interactive Journey</div>
+                        <div class="variation-description">Journey dots navigation, 3D card transforms, Merriweather serif, timeline biography</div>
+                    </a>
+                </div>
+                
+                <div class="variation-card">
+                    <span class="approach-label">Dynamic</span>
+                    <a href="round-2/variation-6-animated-showcase.html" target="_blank">
+                        <div class="variation-number">Variation 06</div>
+                        <div class="variation-name">Animated Showcase</div>
+                        <div class="variation-description">Loading screen, floating notes, Crimson Text serif, constellation social grid</div>
+                    </a>
+                </div>
+                
+                <div class="variation-card">
+                    <span class="approach-label">Elegant</span>
+                    <a href="round-2/variation-7-elegant-dark.html" target="_blank">
+                        <div class="variation-number">Variation 07</div>
+                        <div class="variation-name">Elegant Dark</div>
+                        <div class="variation-description">Lora serif, subtle gradients, smooth fade-ins, minimalist dark aesthetic</div>
+                    </a>
+                </div>
+                
+                <div class="variation-card">
+                    <span class="approach-label">Elegant</span>
+                    <a href="round-2/variation-8-refined-motion.html" target="_blank">
+                        <div class="variation-number">Variation 08</div>
+                        <div class="variation-name">Refined Motion</div>
+                        <div class="variation-description">PT Serif, floating particles, press carousel, sophisticated motion design</div>
+                    </a>
+                </div>
+                
+                <div class="variation-card">
+                    <span class="approach-label">Elegant</span>
+                    <a href="round-2/variation-9-sophisticated-flow.html" target="_blank">
+                        <div class="variation-number">Variation 09</div>
+                        <div class="variation-name">Sophisticated Flow</div>
+                        <div class="variation-description">Libre Baskerville, custom cursor, liquid animations, premium interactions</div>
+                    </a>
+                </div>
+                
+                <div class="variation-card">
+                    <span class="approach-label">Bold</span>
+                    <a href="round-2/variation-10-bold-statement.html" target="_blank">
+                        <div class="variation-number">Variation 10</div>
+                        <div class="variation-name">Bold Statement</div>
+                        <div class="variation-description">Abril Fatface serif, massive animated name, "Raw. Authentic. Unfiltered."</div>
+                    </a>
+                </div>
+                
+                <div class="variation-card">
+                    <span class="approach-label">Bold</span>
+                    <a href="round-2/variation-11-artistic-edge.html" target="_blank">
+                        <div class="variation-number">Variation 11</div>
+                        <div class="variation-name">Artistic Edge</div>
+                        <div class="variation-description">Yeseva One serif, split-screen, custom cursor, asymmetric compositions</div>
+                    </a>
+                </div>
+                
+                <div class="variation-card">
+                    <span class="approach-label">Bold</span>
+                    <a href="round-2/variation-12-creative-impact.html" target="_blank">
+                        <div class="variation-number">Variation 12</div>
+                        <div class="variation-name">Creative Impact</div>
+                        <div class="variation-description">DM Serif Display, loading intro, 3D transforms, continuous gallery carousel</div>
+                    </a>
+                </div>
+            </div>
+            
+            <h2>Round 1 Variations (Previous)</h2>
+            
+            <details>
+                <summary style="cursor: pointer; color: #999; margin-bottom: 20px;">View Round 1 Variations</summary>
+                <div class="variations-grid" style="margin-top: 20px;">
+                    <div class="variation-card">
+                        <span class="approach-label">Minimalist</span>
+                        <a href="round-1/variation-1-minimal-editorial.html" target="_blank">
+                            <div class="variation-number">R1 - Variation 01</div>
+                            <div class="variation-name">Minimal Editorial</div>
+                            <div class="variation-description">Ultra-clean typography, maximum white space</div>
+                        </a>
+                    </div>
+                    
+                    <div class="variation-card">
+                        <span class="approach-label">Minimalist</span>
+                        <a href="round-1/variation-2-stark-contrast.html" target="_blank">
+                            <div class="variation-number">R1 - Variation 02</div>
+                            <div class="variation-name">Stark Contrast</div>
+                            <div class="variation-description">Bold black and white contrasts</div>
+                        </a>
+                    </div>
+                    
+                    <div class="variation-card">
+                        <span class="approach-label">Minimalist</span>
+                        <a href="round-1/variation-3-clean-grid.html" target="_blank">
+                            <div class="variation-number">R1 - Variation 03</div>
+                            <div class="variation-name">Clean Grid</div>
+                            <div class="variation-description">12-column CSS Grid system</div>
+                        </a>
+                    </div>
+                    
+                    <div class="variation-card">
+                        <span class="approach-label">Artistic</span>
+                        <a href="round-1/variation-4-asymmetric-flow.html" target="_blank">
+                            <div class="variation-number">R1 - Variation 04</div>
+                            <div class="variation-name">Asymmetric Flow</div>
+                            <div class="variation-description">Diagonal splits, offset layouts</div>
+                        </a>
+                    </div>
+                    
+                    <div class="variation-card">
+                        <span class="approach-label">Artistic</span>
+                        <a href="round-1/variation-5-overlapping-layers.html" target="_blank">
+                            <div class="variation-number">R1 - Variation 05</div>
+                            <div class="variation-name">Overlapping Layers</div>
+                            <div class="variation-description">Layered compositions</div>
+                        </a>
+                    </div>
+                    
+                    <div class="variation-card">
+                        <span class="approach-label">Artistic</span>
+                        <a href="round-1/variation-6-dynamic-composition.html" target="_blank">
+                            <div class="variation-number">R1 - Variation 06</div>
+                            <div class="variation-name">Dynamic Composition</div>
+                            <div class="variation-description">Dynamic angles, fractured grids</div>
+                        </a>
+                    </div>
+                    
+                    <div class="variation-card">
+                        <span class="approach-label">Intimate</span>
+                        <a href="round-1/variation-7-personal-narrative.html" target="_blank">
+                            <div class="variation-number">R1 - Variation 07</div>
+                            <div class="variation-name">Personal Narrative</div>
+                            <div class="variation-description">Handwritten note overlay</div>
+                        </a>
+                    </div>
+                    
+                    <div class="variation-card">
+                        <span class="approach-label">Intimate</span>
+                        <a href="round-1/variation-8-intimate-journey.html" target="_blank">
+                            <div class="variation-number">R1 - Variation 08</div>
+                            <div class="variation-name">Intimate Journey</div>
+                            <div class="variation-description">Split-screen hero with timeline</div>
+                        </a>
+                    </div>
+                    
+                    <div class="variation-card">
+                        <span class="approach-label">Intimate</span>
+                        <a href="round-1/variation-9-vulnerable-expression.html" target="_blank">
+                            <div class="variation-number">R1 - Variation 09</div>
+                            <div class="variation-name">Vulnerable Expression</div>
+                            <div class="variation-description">Emotional landscapes</div>
+                        </a>
+                    </div>
+                    
+                    <div class="variation-card">
+                        <span class="approach-label">Cinematic</span>
+                        <a href="round-1/variation-10-cinematic-bold.html" target="_blank">
+                            <div class="variation-number">R1 - Variation 10</div>
+                            <div class="variation-name">Cinematic Bold</div>
+                            <div class="variation-description">Full-screen hero with gradients</div>
+                        </a>
+                    </div>
+                    
+                    <div class="variation-card">
+                        <span class="approach-label">Cinematic</span>
+                        <a href="round-1/variation-11-high-impact.html" target="_blank">
+                            <div class="variation-number">R1 - Variation 11</div>
+                            <div class="variation-name">High Impact</div>
+                            <div class="variation-description">Split-screen with dramatic grids</div>
+                        </a>
+                    </div>
+                    
+                    <div class="variation-card">
+                        <span class="approach-label">Cinematic</span>
+                        <a href="round-1/variation-12-dramatic-contrast.html" target="_blank">
+                            <div class="variation-number">R1 - Variation 12</div>
+                            <div class="variation-name">Dramatic Contrast</div>
+                            <div class="variation-description">Parallax-style hero</div>
+                        </a>
+                    </div>
+                </div>
+            </details>
+        </div>
+    </div>
+</body>
+</html>

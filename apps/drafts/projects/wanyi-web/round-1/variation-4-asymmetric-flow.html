@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celine Wanyi - Variation 4: Asymmetric Flow</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #ffffff;
+            color: #000000;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Hero Section - Diagonal Split */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            position: absolute;
+            left: 8%;
+            top: 25%;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 100;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            letter-spacing: -2px;
+        }
+
+        .hero .album-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .hero .release-date {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.7;
+        }
+
+        .hero-image {
+            position: absolute;
+            right: -10%;
+            top: 15%;
+            width: 60%;
+            height: 70%;
+            background: url('https://via.placeholder.com/800x1000/000000/FFFFFF?text=Celine+Wanyi') no-repeat center;
+            background-size: cover;
+            transform: rotate(3deg);
+            filter: grayscale(100%) contrast(1.2);
+        }
+
+        /* Artist Bio - Offset Layout */
+        .bio {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .bio-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 8rem;
+            align-items: start;
+            margin-left: 15%;
+        }
+
+        .bio h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            position: absolute;
+            left: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .bio-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            font-weight: 300;
+            max-width: 500px;
+        }
+
+        .bio-quote {
+            font-size: 2.5rem;
+            font-weight: 100;
+            font-style: italic;
+            margin-top: 3rem;
+            opacity: 0.8;
+            line-height: 1.2;
+        }
+
+        /* Gallery - Scattered Layout */
+        .gallery {
+            padding: 100px 0;
+            background: #f8f8f8;
+        }
+
+        .gallery h2 {
+            font-size: 2.5rem;
+            font-weight: 200;
+            margin-bottom: 4rem;
+            text-align: right;
+            margin-right: 10%;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(8, 100px);
+            gap: 2rem;
+            padding: 0 5%;
+        }
+
+        .gallery-item {
+            background: #000;
+            filter: grayscale(100%);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: 1/4;
+            grid-row: 1/3;
+            background: url('https://via.placeholder.com/400x300/000000/FFFFFF?text=Photo+1') no-repeat center/cover;
+        }
+
+        .gallery-item:nth-child(2) {
+            grid-column: 6/9;
+            grid-row: 2/5;
+            background: url('https://via.placeholder.com/400x400/000000/FFFFFF?text=Photo+2') no-repeat center/cover;
+        }
+
+        .gallery-item:nth-child(3) {
+            grid-column: 10/13;
+            grid-row: 1/4;
+            background: url('https://via.placeholder.com/400x400/000000/FFFFFF?text=Photo+3') no-repeat center/cover;
+        }
+
+        .gallery-item:nth-child(4) {
+            grid-column: 2/5;
+            grid-row: 4/7;
+            background: url('https://via.placeholder.com/400x400/000000/FFFFFF?text=Photo+4') no-repeat center/cover;
+        }
+
+        .gallery-item:nth-child(5) {
+            grid-column: 7/11;
+            grid-row: 6/8;
+            background: url('https://via.placeholder.com/500x300/000000/FFFFFF?text=Photo+5') no-repeat center/cover;
+        }
+
+        .gallery-item:hover {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        /* Press Section - Diagonal Flow */
+        .press {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .press h2 {
+            font-size: 4rem;
+            font-weight: 900;
+            position: absolute;
+            left: 20%;
+            top: 15%;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .press-content {
+            margin-left: 35%;
+            margin-top: 5%;
+            z-index: 2;
+            position: relative;
+        }
+
+        .press-item {
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .press-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .press-quote {
+            font-size: 1.1rem;
+            font-weight: 300;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        /* Newsletter - Angular Design */
+        .newsletter {
+            background: #000;
+            color: #fff;
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .newsletter-content {
+            position: relative;
+            transform: skew(-5deg);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .newsletter h2 {
+            font-size: 3.5rem;
+            font-weight: 100;
+            margin-bottom: 2rem;
+            transform: skew(5deg);
+        }
+
+        .newsletter p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            transform: skew(5deg);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            transform: skew(5deg);
+        }
+
+        .newsletter input[type="email"] {
+            flex: 1;
+            padding: 1rem;
+            font-size: 1.1rem;
+            border: 2px solid #fff;
+            background: transparent;
+            color: #fff;
+        }
+
+        .newsletter button {
+            padding: 1rem 2rem;
+            background: #fff;
+            color: #000;
+            border: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter button:hover {
+            background: #f0f0f0;
+        }
+
+        /* Social Links - Floating */
+        .social {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .social-link {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #000;
+            text-decoration: none;
+            padding: 2rem;
+            border: 2px solid #000;
+            transition: all 0.3s ease;
+            transform: rotate(-2deg);
+        }
+
+        .social-link:nth-child(2) {
+            transform: rotate(3deg);
+            margin-top: -2rem;
+        }
+
+        .social-link:nth-child(3) {
+            transform: rotate(-1deg);
+            margin-top: 1rem;
+        }
+
+        .social-link:hover {
+            background: #000;
+            color: #fff;
+            transform: rotate(0deg) scale(1.1);
+        }
+
+        /* Contact - Minimal Offset */
+        .contact {
+            background: #f0f0f0;
+            padding: 100px 0;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin-left: 20%;
+        }
+
+        .contact h2 {
+            font-size: 2.8rem;
+            font-weight: 200;
+            margin-bottom: 3rem;
+        }
+
+        .contact-info {
+            font-size: 1.3rem;
+            line-height: 2;
+            font-weight: 300;
+        }
+
+        .contact-info a {
+            color: #000;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-image {
+                right: -20%;
+                width: 70%;
+            }
+            
+            .bio-content {
+                grid-template-columns: 1fr;
+                margin-left: 5%;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(6, 1fr);
+                grid-template-rows: repeat(12, 80px);
+            }
+            
+            .newsletter-content {
+                transform: none;
+            }
+            
+            .newsletter h2,
+            .newsletter p,
+            .newsletter-form {
+                transform: none;
+            }
+            
+            .social-links {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .contact-content {
+                margin-left: 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>CELINE<br>WANYI</h1>
+                <div class="album-title">NEW RELEASE</div>
+                <div class="release-date">Available Now</div>
+            </div>
+            <div class="hero-image"></div>
+        </section>
+
+        <!-- Artist Biography -->
+        <section class="bio">
+            <h2>ARTIST</h2>
+            <div class="bio-content">
+                <div class="bio-text">
+                    Celine Wanyi is a multicultural artist whose intimate soundscapes bridge worlds through vulnerable storytelling and sophisticated musical arrangements. Her work explores themes of identity, belonging, and the beautiful complexity of living between cultures.
+                </div>
+                <div class="bio-quote">
+                    "Music is the language that speaks when words fall short"
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Gallery -->
+        <section class="gallery">
+            <h2>VISUALS</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+            </div>
+        </section>
+
+        <!-- Press/Featured In -->
+        <section class="press">
+            <h2>PRESS</h2>
+            <div class="press-content">
+                <div class="press-item">
+                    <div class="press-logo">PITCHFORK</div>
+                    <div class="press-quote">"A masterful exploration of cultural identity through sound"</div>
+                </div>
+                <div class="press-item">
+                    <div class="press-logo">THE FADER</div>
+                    <div class="press-quote">"Intimate yet universally resonant"</div>
+                </div>
+                <div class="press-item">
+                    <div class="press-logo">NPR MUSIC</div>
+                    <div class="press-quote">"An artist to watch in the contemporary music scene"</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Signup -->
+        <section class="newsletter">
+            <div class="newsletter-content">
+                <h2>STAY CONNECTED</h2>
+                <p>Join the journey. Get updates on new releases, tour dates, and exclusive content.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">SUBSCRIBE</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Social Media Links -->
+        <section class="social">
+            <div class="social-links">
+                <a href="#" class="social-link">INSTAGRAM</a>
+                <a href="#" class="social-link">SPOTIFY</a>
+                <a href="#" class="social-link">YOUTUBE</a>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="contact">
+            <div class="contact-content">
+                <h2>CONTACT</h2>
+                <div class="contact-info">
+                    <p>For booking inquiries:<br><a href="mailto:booking@celinewanyi.com">booking@celinewanyi.com</a></p>
+                    <p>General inquiries:<br><a href="mailto:hello@celinewanyi.com">hello@celinewanyi.com</a></p>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

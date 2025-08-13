@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celine Wanyi - Dynamic Grid Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section - Dynamic Grid */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-gap: 20px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            grid-column: 1 / 7;
+            z-index: 2;
+            animation: slideInLeft 1.5s ease-out;
+        }
+
+        .hero-visual {
+            grid-column: 7 / 13;
+            position: relative;
+            animation: slideInRight 1.5s ease-out;
+        }
+
+        .artist-name {
+            font-family: 'Crimson Text', serif;
+            font-size: 4.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #cccccc);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGlow 3s ease-in-out infinite;
+        }
+
+        .release-info {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .new-release {
+            font-size: 1.1rem;
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: pulse 2s infinite;
+        }
+
+        .song-title {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 20px;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-image:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 30px 80px rgba(255, 107, 107, 0.3);
+        }
+
+        /* Background Animation */
+        .bg-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) {
+            width: 4px;
+            height: 4px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 6px;
+            height: 6px;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .particle:nth-child(3) {
+            width: 3px;
+            height: 3px;
+            left: 80%;
+            animation-delay: 4s;
+        }
+
+        /* Biography Section */
+        .biography {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+        }
+
+        .bio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .bio-text {
+            font-size: 1.2rem;
+            line-height: 2;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+
+        .bio-text.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .section-title {
+            font-family: 'Crimson Text', serif;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: #ff6b6b;
+        }
+
+        .bio-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            transition: transform 0.5s ease;
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        .bio-image.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .bio-image:hover {
+            transform: scale(1.03);
+        }
+
+        /* Dynamic Gallery Grid */
+        .gallery {
+            padding: 8rem 0;
+            background: #0a0a0a;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            transition: transform 0.5s ease;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .gallery-item.animate {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.8), rgba(255, 107, 107, 0.3));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Press Section */
+        .press {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+        }
+
+        .press-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .press-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .press-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .press-item:hover {
+            background: rgba(255, 107, 107, 0.1);
+            border-color: rgba(255, 107, 107, 0.3);
+            transform: translateY(-10px);
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            padding: 6rem 0;
+            background: #0a0a0a;
+            text-align: center;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 3rem auto 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .newsletter-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #ff6b6b, #ff5252);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Social & Contact */
+        .footer {
+            padding: 6rem 0 3rem;
+            background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .social-link {
+            display: inline-block;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 107, 107, 0.2);
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        .contact-email {
+            font-size: 1.2rem;
+            color: #ff6b6b;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-email:hover {
+            color: #ff5252;
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes textGlow {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(255, 107, 107, 0.8);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 2rem 0;
+            }
+
+            .hero-content,
+            .hero-visual {
+                grid-column: 1;
+            }
+
+            .artist-name {
+                font-size: 3rem;
+            }
+
+            .bio-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Particles -->
+    <div class="bg-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="artist-name">Celine Wanyi</h1>
+            <div class="release-info">
+                <div class="new-release">New Release</div>
+                <div class="song-title">Latest Single</div>
+                <p>Experience the newest sound from Celine Wanyi - a journey through contemporary artistry.</p>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/53e5ea32-370c-4417-b9b8-c9c90aa8dff9/CW2.jpg" alt="Celine Wanyi" class="hero-image">
+        </div>
+    </section>
+
+    <!-- Biography -->
+    <section class="biography">
+        <div class="container">
+            <div class="bio-grid">
+                <div class="bio-text">
+                    <h2 class="section-title">Artist</h2>
+                    <p>Celine Wanyi represents a new generation of artists who seamlessly blend traditional influences with contemporary innovation. Her unique approach to music and visual artistry creates immersive experiences that resonate across cultural boundaries.</p>
+                    <p>With a background that spans multiple disciplines, Celine brings a distinctive perspective to every project, crafting works that challenge conventional boundaries while maintaining deep emotional resonance.</p>
+                </div>
+                <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/4477d9e6-194d-4b6f-8aca-eec5d12c76eb/CW+WAIWY+PRESS+PIC+5.jpeg?format=1000w" alt="Celine Wanyi Portrait" class="bio-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery">
+        <div class="container">
+            <h2 class="section-title">Visual Journey</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/53e5ea32-370c-4417-b9b8-c9c90aa8dff9/CW2.jpg" alt="Gallery Image 1">
+                    <div class="gallery-overlay">Artist Portrait</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/4477d9e6-194d-4b6f-8aca-eec5d12c76eb/CW+WAIWY+PRESS+PIC+5.jpeg?format=1000w" alt="Gallery Image 2">
+                    <div class="gallery-overlay">Press Photo</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/921d8a47-c1e8-40a7-b065-fc3a112c88da/CW+WAIWY+PRESS+PIC+1.jpeg" alt="Gallery Image 3">
+                    <div class="gallery-overlay">Performance</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Press -->
+    <section class="press">
+        <div class="container">
+            <h2 class="section-title">Featured In</h2>
+            <div class="press-grid">
+                <div class="press-item">
+                    <h3>Music Magazine</h3>
+                    <p>"A breakthrough artist redefining contemporary sound"</p>
+                </div>
+                <div class="press-item">
+                    <h3>Cultural Review</h3>
+                    <p>"Innovative artistry with deep emotional resonance"</p>
+                </div>
+                <div class="press-item">
+                    <h3>Art & Sound</h3>
+                    <p>"Celine Wanyi creates immersive artistic experiences"</p>
+                </div>
+                <div class="press-item">
+                    <h3>New Voices</h3>
+                    <p>"A distinctive voice in the contemporary art scene"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <h2 class="section-title">Stay Connected</h2>
+            <p>Get updates on new releases, performances, and exclusive content.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email">
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <h2 class="section-title">Connect</h2>
+            <div class="social-links">
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">Spotify</a>
+                <a href="#" class="social-link">YouTube</a>
+                <a href="#" class="social-link">Twitter</a>
+            </div>
+            <a href="mailto:contact@celinewanyi.com" class="contact-email">contact@celinewanyi.com</a>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const animateElements = document.querySelectorAll('.bio-text, .bio-image, .gallery-item, .press-item');
+            animateElements.forEach(el => observer.observe(el));
+
+            // Staggered gallery animations
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            galleryItems.forEach((item, index) => {
+                setTimeout(() => {
+                    observer.observe(item);
+                }, index * 200);
+            });
+        });
+
+        // Dynamic grid hover effects
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.zIndex = '10';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                item.style.zIndex = '1';
+            });
+        });
+
+        // Newsletter form animation
+        document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('.newsletter-btn');
+            btn.textContent = 'Subscribed!';
+            btn.style.background = 'linear-gradient(135deg, #4caf50, #45a049)';
+            setTimeout(() => {
+                btn.textContent = 'Subscribe';
+                btn.style.background = 'linear-gradient(135deg, #ff6b6b, #ff5252)';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

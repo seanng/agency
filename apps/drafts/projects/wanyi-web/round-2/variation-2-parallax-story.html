@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celine Wanyi - Musical Storyteller</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Parallax Container */
+        .parallax-container {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            top: -20%;
+            left: -10%;
+            width: 120%;
+            height: 140%;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            will-change: transform;
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Hero Section - Immersive Parallax */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero .parallax-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)),
+                             url('https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/53e5ea32-370c-4417-b9b8-c9c90aa8dff9/CW2.jpg');
+            filter: contrast(1.1) brightness(0.9);
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: clamp(4rem, 10vw, 10rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.8);
+            letter-spacing: -0.02em;
+            animation: heroTitle 3s ease-out;
+            background: linear-gradient(45deg, #fff, #ccc, #fff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes heroTitle {
+            0% {
+                opacity: 0;
+                transform: translateY(100px) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            animation: fadeInUp 2s ease-out 0.5s both;
+            letter-spacing: 0.1em;
+        }
+
+        .release-info {
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(20px);
+            padding: 2rem 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: fadeInUp 2s ease-out 1s both;
+            transition: all 0.4s ease;
+        }
+
+        .release-info:hover {
+            background: rgba(0,0,0,0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+        }
+
+        .release-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #f0f0f0;
+        }
+
+        .release-date {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Navigation with blur effect */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(30px);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #fff;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #fff;
+        }
+
+        nav a:hover:before {
+            width: 100%;
+        }
+
+        /* Biography with parallax story */
+        .biography {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .biography .parallax-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)),
+                             url('https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/4477d9e6-194d-4b6f-8aca-eec5d12c76eb/CW+WAIWY+PRESS+PIC+5.jpeg?format=1000w');
+        }
+
+        .bio-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .bio-title {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 4rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 1s ease;
+        }
+
+        .bio-title.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .bio-text {
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(15px);
+            padding: 3rem;
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .bio-text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .bio-text p.visible {
+            opacity: 0.9;
+            transform: translateY(0);
+        }
+
+        .bio-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Gallery with Parallax */
+        .gallery {
+            position: relative;
+            min-height: 120vh;
+            padding: 8rem 2rem;
+        }
+
+        .gallery .parallax-bg {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a, #1a1a1a);
+        }
+
+        .gallery-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery h2 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 4rem;
+            text-align: center;
+            margin-bottom: 6rem;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 1s ease;
+        }
+
+        .gallery h2.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .gallery-masonry {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 25px;
+            overflow: hidden;
+            cursor: pointer;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.8s ease;
+        }
+
+        .gallery-item.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .gallery-item:nth-child(1) {
+            aspect-ratio: 4/5;
+            grid-row: span 2;
+        }
+
+        .gallery-item:nth-child(2) {
+            aspect-ratio: 16/9;
+        }
+
+        .gallery-item:nth-child(3) {
+            aspect-ratio: 3/4;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.6s ease;
+            filter: grayscale(20%) contrast(1.1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+            filter: grayscale(0%) contrast(1.2);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.9));
+            opacity: 0;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: end;
+            padding: 2rem;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-caption {
+            color: #fff;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        /* Press Section */
+        .press {
+            padding: 8rem 2rem;
+            background: #000;
+            text-align: center;
+        }
+
+        .press h2 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 3.5rem;
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .press h2.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .press-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .press-item {
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            background: rgba(255,255,255,0.02);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .press-item.visible {
+            opacity: 0.8;
+            transform: translateY(0);
+        }
+
+        .press-item:hover {
+            opacity: 1;
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a, #0a0a0a);
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .newsletter p {
+            opacity: 0.8;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 60px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .newsletter input {
+            flex: 1;
+            padding: 1.5rem 2rem;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .newsletter input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .newsletter button {
+            padding: 1.5rem 3rem;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            color: #000;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .newsletter button:hover {
+            background: linear-gradient(45deg, #f0f0f0, #ddd);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255,255,255,0.2);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 6rem 2rem 4rem;
+            background: #000;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .social-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .social-links a:hover {
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .contact {
+            opacity: 0.5;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: clamp(3rem, 8vw, 6rem);
+            }
+            
+            .bio-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+            
+            .gallery-masonry {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                gap: 2rem;
+            }
+            
+            .parallax-bg {
+                background-attachment: scroll;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#biography">Story</a></li>
+            <li><a href="#gallery">Visuals</a></li>
+            <li><a href="#press">Press</a></li>
+            <li><a href="#contact">Connect</a></li>
+        </ul>
+    </nav>
+
+    <section id="hero" class="hero parallax-container">
+        <div class="parallax-bg" data-speed="0.5"></div>
+        <div class="hero-content">
+            <h1>Celine Wanyi</h1>
+            <p class="hero-subtitle">Musical Storyteller</p>
+            <div class="release-info">
+                <div class="release-title">Latest Single: "Echoes of Tomorrow"</div>
+                <div class="release-date">Available on all platforms</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="biography" class="biography parallax-container">
+        <div class="parallax-bg" data-speed="0.3"></div>
+        <div class="bio-content">
+            <div class="bio-title">The Journey</div>
+            <div class="bio-text">
+                <p>Celine Wanyi crafts sonic narratives that transcend traditional boundaries, weaving together elements of contemporary artistry with deeply personal storytelling.</p>
+                <p>Her music serves as a bridge between intimate vulnerability and universal experience, creating spaces where listeners can find both solace and inspiration.</p>
+                <p>Through carefully constructed compositions and immersive live performances, she invites audiences into a world where every note carries meaning and every silence speaks volumes.</p>
+                <p>Drawing from a rich tapestry of influences, her work continues to evolve, pushing the boundaries of what music can accomplish as both art and emotional connection.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery parallax-container">
+        <div class="parallax-bg" data-speed="0.2"></div>
+        <div class="gallery-content">
+            <h2>Visual Moments</h2>
+            <div class="gallery-masonry">
+                <div class="gallery-item">
+                    <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/921d8a47-c1e8-40a7-b065-fc3a112c88da/CW+WAIWY+PRESS+PIC+1.jpeg" alt="Performance">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Live Performance</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/53e5ea32-370c-4417-b9b8-c9c90aa8dff9/CW2.jpg" alt="Portrait">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">Artist Portrait</div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/4477d9e6-194d-4b6f-8aca-eec5d12c76eb/CW+WAIWY+PRESS+PIC+5.jpeg?format=1000w" alt="Studio">
+                    <div class="gallery-overlay">
+                        <div class="gallery-caption">In Studio</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="press" class="press">
+        <h2>Recognition</h2>
+        <div class="press-grid">
+            <div class="press-item">
+                <h3>Rolling Stone</h3>
+                <p>"A compelling new voice"</p>
+            </div>
+            <div class="press-item">
+                <h3>Pitchfork</h3>
+                <p>"Mesmerizing artistry"</p>
+            </div>
+            <div class="press-item">
+                <h3>The Fader</h3>
+                <p>"Unforgettable sound"</p>
+            </div>
+            <div class="press-item">
+                <h3>NPR Music</h3>
+                <p>"Essential listening"</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <h2>Stay in the Story</h2>
+        <p>Subscribe for exclusive releases, behind-the-scenes content, and intimate updates</p>
+        <form class="newsletter-form">
+            <input type="email" placeholder="Enter your email address" required>
+            <button type="submit">Join</button>
+        </form>
+    </section>
+
+    <footer id="contact" class="footer">
+        <div class="social-links">
+            <a href="#">Instagram</a>
+            <a href="#">Spotify</a>
+            <a href="#">YouTube</a>
+            <a href="#">Apple Music</a>
+            <a href="#">SoundCloud</a>
+        </div>
+        <div class="contact">
+            <p>For inquiries and collaborations: hello@celinewanyi.com</p>
+        </div>
+    </footer>
+
+    <script>
+        // Parallax scrolling effect
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax-bg');
+            
+            parallaxElements.forEach(element => {
+                const speed = element.dataset.speed || 0.5;
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.bio-title, .bio-text p, .gallery h2, .gallery-item, .press h2, .press-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Staggered animation for bio text
+        const bioTextElements = document.querySelectorAll('.bio-text p');
+        bioTextElements.forEach((el, index) => {
+            setTimeout(() => {
+                el.style.transitionDelay = `${index * 0.2}s`;
+            }, 100);
+        });
+
+        // Staggered animation for gallery items
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        galleryItems.forEach((el, index) => {
+            setTimeout(() => {
+                el.style.transitionDelay = `${index * 0.15}s`;
+            }, 100);
+        });
+
+        // Staggered animation for press items
+        const pressItems = document.querySelectorAll('.press-item');
+        pressItems.forEach((el, index) => {
+            setTimeout(() => {
+                el.style.transitionDelay = `${index * 0.1}s`;
+            }, 100);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

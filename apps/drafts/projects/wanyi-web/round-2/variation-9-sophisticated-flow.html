@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celine Wanyi - Sophisticated Flow</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #080808;
+            color: #e8e8e8;
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            backdrop-filter: blur(2px);
+        }
+
+        .cursor.active {
+            transform: scale(1.5);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Sophisticated flow animations */
+        @keyframes cascadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(60px) rotateX(20deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotateX(0deg);
+            }
+        }
+
+        @keyframes liquidFlow {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-5px) rotate(0.5deg);
+            }
+            75% {
+                transform: translateY(5px) rotate(-0.5deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+
+        /* Hero section with sophisticated layering */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #080808 0%, #1a1a1a 50%, #080808 100%);
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/921d8a47-c1e8-40a7-b065-fc3a112c88da/CW+WAIWY+PRESS+PIC+1.jpeg') center/cover;
+            opacity: 0.15;
+            filter: blur(2px) grayscale(80%) contrast(1.2);
+            animation: liquidFlow 12s ease-in-out infinite;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 30% 70%, rgba(0,0,0,0.4), rgba(0,0,0,0.8));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 1000px;
+            padding: 2rem;
+        }
+
+        .hero-intro {
+            font-size: 1rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            margin-bottom: 2rem;
+            animation: cascadeIn 1.2s ease-out 0.3s both;
+        }
+
+        .hero-name {
+            font-family: 'Libre Baskerville', serif;
+            font-size: clamp(4rem, 12vw, 8rem);
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            letter-spacing: -0.04em;
+            animation: cascadeIn 1.4s ease-out 0.6s both;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .hero-name::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+            animation: expandLine 2s ease-out 1.5s both;
+        }
+
+        @keyframes expandLine {
+            to {
+                width: 200px;
+            }
+        }
+
+        .hero-tagline {
+            font-size: 1.4rem;
+            color: #c0c0c0;
+            font-weight: 300;
+            margin-bottom: 3.5rem;
+            font-style: italic;
+            animation: cascadeIn 1.6s ease-out 0.9s both;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+            animation: cascadeIn 1.8s ease-out 1.2s both;
+        }
+
+        .hero-button {
+            padding: 1.5rem 3rem;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 60px;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .hero-button:hover::before {
+            left: 100%;
+        }
+
+        .hero-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #666;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Flowing section animations */
+        .section {
+            padding: 10rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-flow {
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .section-flow.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-meta {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .section-number {
+            font-size: 3rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.1);
+        }
+
+        .section-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: #ffffff;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title span {
+            display: inline-block;
+            transform: translateY(100%);
+            transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .section-flow.visible .section-title span {
+            transform: translateY(0);
+        }
+
+        /* Biography with sophisticated layout */
+        .bio-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 6rem;
+            align-items: start;
+            margin-top: 6rem;
+        }
+
+        .bio-visual {
+            position: sticky;
+            top: 10rem;
+        }
+
+        .bio-image-container {
+            position: relative;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            border-radius: 16px;
+            transform: rotate(-2deg);
+            transition: transform 0.6s ease;
+        }
+
+        .bio-image-container:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .bio-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .bio-image-container:hover .bio-image {
+            transform: scale(1.1);
+        }
+
+        .bio-text {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: #c8c8c8;
+        }
+
+        .bio-paragraph {
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+
+        .section-flow.visible .bio-paragraph:nth-child(1) {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.2s;
+        }
+
+        .section-flow.visible .bio-paragraph:nth-child(2) {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.4s;
+        }
+
+        .section-flow.visible .bio-paragraph:nth-child(3) {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.6s;
+        }
+
+        /* Gallery with sophisticated hover states */
+        .gallery-flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 6rem;
+        }
+
+        .gallery-piece {
+            position: relative;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            border-radius: 12px;
+            cursor: pointer;
+            transform-origin: center;
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .gallery-piece::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-piece:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-piece:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.6s ease;
+            filter: grayscale(30%);
+        }
+
+        .gallery-piece:hover .gallery-image {
+            transform: scale(1.15);
+            filter: grayscale(0%);
+        }
+
+        /* Press section with flowing cards */
+        .press-flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 6rem;
+        }
+
+        .press-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .press-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .press-card:hover::before {
+            opacity: 1;
+        }
+
+        .press-card:hover {
+            transform: translateY(-10px);
+            background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .press-outlet {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .press-quote {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #b8b8b8;
+            font-style: italic;
+            position: relative;
+        }
+
+        .press-quote::before {
+            content: '"';
+            font-size: 4rem;
+            color: rgba(255,255,255,0.1);
+            position: absolute;
+            top: -20px;
+            left: -15px;
+            font-family: 'Libre Baskerville', serif;
+        }
+
+        /* Newsletter with sophisticated interaction */
+        .newsletter-section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005));
+            border-radius: 30px;
+            padding: 6rem 4rem;
+            margin: 8rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
+
+        .newsletter-section::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), transparent, rgba(255,255,255,0.1));
+            border-radius: 32px;
+            z-index: -1;
+        }
+
+        .newsletter-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .newsletter-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+        }
+
+        .newsletter-description {
+            font-size: 1.1rem;
+            color: #a8a8a8;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .newsletter-field {
+            width: 100%;
+            padding: 1.8rem 2.5rem;
+            background: rgba(0,0,0,0.4);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 60px;
+            color: #ffffff;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(15px);
+        }
+
+        .newsletter-field:focus {
+            outline: none;
+            border-color: rgba(255,255,255,0.3);
+            background: rgba(0,0,0,0.6);
+            transform: scale(1.02);
+        }
+
+        .newsletter-submit {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 1.4rem 2.5rem;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
+            border: none;
+            border-radius: 60px;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .newsletter-submit:hover {
+            background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.15));
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        /* Social and contact with elegant spacing */
+        .footer-flow {
+            text-align: center;
+            padding: 6rem 0 4rem;
+        }
+
+        .social-constellation {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        .social-orb {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+
+        .social-orb::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, rgba(255,255,255,0.2), transparent, rgba(255,255,255,0.2));
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .social-orb:hover::before {
+            opacity: 1;
+        }
+
+        .social-orb:hover {
+            transform: translateY(-12px) scale(1.15);
+            background: linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .contact-details {
+            color: #888;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-top: 4rem;
+        }
+
+        .contact-details p {
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive refinements */
+        @media (max-width: 1024px) {
+            .bio-container {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+            
+            .bio-visual {
+                position: relative;
+                top: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-actions {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .gallery-flow {
+                grid-template-columns: 1fr;
+            }
+            
+            .press-flow {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-constellation {
+                gap: 2rem;
+            }
+            
+            .social-orb {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-intro">Artist • Composer • Storyteller</div>
+            <h1 class="hero-name">Celine Wanyi</h1>
+            <div class="hero-tagline">Where silence meets sound, where stories unfold</div>
+            <div class="hero-actions">
+                <a href="#" class="hero-button">Latest Release</a>
+                <a href="#" class="hero-button" style="background: rgba(255,255,255,0.05);">Explore Music</a>
+            </div>
+        </div>
+        <div class="hero-scroll">Scroll to discover</div>
+    </section>
+
+    <!-- Biography Section -->
+    <section class="section section-flow">
+        <div class="section-meta">
+            <div class="section-number">01</div>
+            <div>About the Artist</div>
+        </div>
+        <h2 class="section-title">
+            <span>The</span> <span>Journey</span> <span>Within</span>
+        </h2>
+        
+        <div class="bio-container">
+            <div class="bio-visual">
+                <div class="bio-image-container">
+                    <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/53e5ea32-370c-4417-b9b8-c9c90aa8dff9/CW2.jpg" alt="Celine Wanyi" class="bio-image">
+                </div>
+            </div>
+            <div class="bio-text">
+                <p class="bio-paragraph">Celine Wanyi exists in the delicate intersection of cultures, languages, and sonic landscapes. Her music is an exploration of identity through sound—each composition a map of emotional territories both familiar and foreign.</p>
+                
+                <p class="bio-paragraph">Drawing from a well of personal narrative and universal themes, she crafts songs that breathe with the rhythm of memory and pulse with the urgency of the present moment. Her voice carries generations of stories while pioneering new forms of musical expression.</p>
+                
+                <p class="bio-paragraph">In a world that often demands categorization, Celine creates music that refuses simple labels—ethereal yet grounded, intimate yet expansive, traditional yet revolutionary in its approach to contemporary storytelling.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section section-flow">
+        <div class="section-meta">
+            <div class="section-number">02</div>
+            <div>Visual Journey</div>
+        </div>
+        <h2 class="section-title">
+            <span>Moments</span> <span>In</span> <span>Frame</span>
+        </h2>
+        
+        <div class="gallery-flow">
+            <div class="gallery-piece">
+                <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/53e5ea32-370c-4417-b9b8-c9c90aa8dff9/CW2.jpg" alt="Celine Wanyi Portrait" class="gallery-image">
+            </div>
+            <div class="gallery-piece">
+                <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/4477d9e6-194d-4b6f-8aca-eec5d12c76eb/CW+WAIWY+PRESS+PIC+5.jpeg?format=1000w" alt="Celine Wanyi Performance" class="gallery-image">
+            </div>
+            <div class="gallery-piece">
+                <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/921d8a47-c1e8-40a7-b065-fc3a112c88da/CW+WAIWY+PRESS+PIC+1.jpeg" alt="Celine Wanyi Studio" class="gallery-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Press Section -->
+    <section class="section section-flow">
+        <div class="section-meta">
+            <div class="section-number">03</div>
+            <div>Critical Reception</div>
+        </div>
+        <h2 class="section-title">
+            <span>Voices</span> <span>Of</span> <span>Recognition</span>
+        </h2>
+        
+        <div class="press-flow">
+            <div class="press-card">
+                <div class="press-outlet">The Guardian</div>
+                <div class="press-quote">Wanyi's music transcends the boundaries between the personal and universal, creating soundscapes that feel both intimate and infinite.</div>
+            </div>
+            <div class="press-card">
+                <div class="press-outlet">Stereogum</div>
+                <div class="press-quote">An artist who understands that the most profound statements often come wrapped in the gentlest of musical gestures.</div>
+            </div>
+            <div class="press-card">
+                <div class="press-outlet">Consequence</div>
+                <div class="press-quote">Celine Wanyi crafts songs that exist in the liminal spaces of experience—where memory meets imagination.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section section-flow">
+        <div class="newsletter-content">
+            <h2 class="newsletter-title">Join the Journey</h2>
+            <p class="newsletter-description">Subscribe to receive updates on new releases, exclusive content, and intimate behind-the-scenes moments from the creative process.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-field" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <section class="footer-flow section-flow">
+        <div class="section-meta">
+            <div class="section-number">04</div>
+            <div>Stay Connected</div>
+        </div>
+        
+        <div class="social-constellation">
+            <a href="#" class="social-orb" title="Spotify">♪</a>
+            <a href="#" class="social-orb" title="Apple Music">♫</a>
+            <a href="#" class="social-orb" title="Instagram">@</a>
+            <a href="#" class="social-orb" title="YouTube">▶</a>
+            <a href="#" class="social-orb" title="Email">✉</a>
+        </div>
+        
+        <div class="contact-details">
+            <p>Management & Booking Inquiries</p>
+            <p><strong>hello@celinewanyi.com</strong></p>
+            <p style="margin-top: 2rem; opacity: 0.6;">© 2024 Celine Wanyi. All rights reserved.</p>
+        </div>
+    </section>
+
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        let mouseX = 0, mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+        });
+
+        // Cursor interactions
+        const interactiveElements = document.querySelectorAll('a, button, .gallery-piece, .press-card');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+        });
+
+        // Sophisticated scroll animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const flowObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 150);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section-flow').forEach(el => {
+            flowObserver.observe(el);
+        });
+
+        // Gallery sophisticated interactions
+        document.querySelectorAll('.gallery-piece').forEach((piece, index) => {
+            piece.addEventListener('mouseenter', function() {
+                // Add subtle rotation based on position
+                const rotation = (index % 2 === 0) ? 2 : -2;
+                this.style.transform = `translateY(-15px) scale(1.03) rotateZ(${rotation}deg)`;
+            });
+            
+            piece.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1) rotateZ(0deg)';
+            });
+        });
+
+        // Press cards with staggered entrance
+        const pressCards = document.querySelectorAll('.press-card');
+        pressCards.forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        // Newsletter field focus effects
+        const newsletterField = document.querySelector('.newsletter-field');
+        newsletterField.addEventListener('focus', function() {
+            this.parentElement.style.transform = 'scale(1.02)';
+        });
+        
+        newsletterField.addEventListener('blur', function() {
+            this.parentElement.style.transform = 'scale(1)';
+        });
+
+        // Social orbs with wave effect
+        const socialOrbs = document.querySelectorAll('.social-orb');
+        socialOrbs.forEach((orb, index) => {
+            orb.addEventListener('mouseenter', function() {
+                // Create wave effect on surrounding orbs
+                socialOrbs.forEach((otherOrb, otherIndex) => {
+                    if (otherIndex !== index) {
+                        const distance = Math.abs(otherIndex - index);
+                        const delay = distance * 50;
+                        setTimeout(() => {
+                            otherOrb.style.transform = 'translateY(-3px) scale(1.02)';
+                            setTimeout(() => {
+                                otherOrb.style.transform = 'translateY(0) scale(1)';
+                            }, 200);
+                        }, delay);
+                    }
+                });
+            });
+        });
+
+        // Parallax effect for hero background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroBackground = document.querySelector('.hero-bg');
+            if (scrolled < window.innerHeight) {
+                heroBackground.style.transform = `translateY(${scrolled * 0.5}px) scale(${1 + scrolled * 0.0005})`;
+            }
+        });
+
+        // Bio image rotation on scroll
+        window.addEventListener('scroll', () => {
+            const bioImage = document.querySelector('.bio-image-container');
+            const rect = bioImage.getBoundingClientRect();
+            const scrollProgress = (window.innerHeight - rect.top) / window.innerHeight;
+            
+            if (scrollProgress > 0 && scrollProgress < 1) {
+                const rotation = -2 + (scrollProgress * 4); // -2 to +2 degrees
+                bioImage.style.transform = `rotate(${rotation}deg)`;
+            }
+        });
+    </script>
+</body>
+</html>

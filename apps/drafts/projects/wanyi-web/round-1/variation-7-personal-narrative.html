@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celine Wanyi - Personal Narrative</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://via.placeholder.com/1920x1080/000000/FFFFFF?text=Celine+Close-up+Portrait');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 100;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .handwritten-note {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            transform: rotate(5deg);
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            color: #333;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            z-index: 1000;
+            padding: 1rem 0;
+            backdrop-filter: blur(10px);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 300;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #666;
+        }
+
+        /* Biography Section */
+        .biography {
+            padding: 8rem 0;
+            background-color: #f8f8f8;
+        }
+
+        .bio-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .bio-image {
+            position: relative;
+        }
+
+        .bio-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+            filter: grayscale(100%) contrast(1.2);
+        }
+
+        .bio-text h2 {
+            font-size: 2.5rem;
+            font-weight: 100;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .bio-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .personal-quote {
+            font-style: italic;
+            font-size: 1.3rem;
+            color: #666;
+            border-left: 3px solid #333;
+            padding-left: 2rem;
+            margin: 3rem 0;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 8rem 0;
+            background-color: #fff;
+        }
+
+        .gallery h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 100;
+            margin-bottom: 4rem;
+            color: #333;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.1);
+            transition: transform 0.3s, filter 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            filter: grayscale(50%);
+        }
+
+        .story-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 2rem 1rem 1rem;
+            font-style: italic;
+        }
+
+        /* Press Section */
+        .press {
+            padding: 8rem 0;
+            background-color: #f8f8f8;
+        }
+
+        .press h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 100;
+            margin-bottom: 4rem;
+            color: #333;
+        }
+
+        .press-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .press-item {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .press-item img {
+            width: 120px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            filter: grayscale(100%);
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            padding: 8rem 0;
+            background-color: #333;
+            color: white;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 2.5rem;
+            font-weight: 100;
+            margin-bottom: 2rem;
+        }
+
+        .newsletter p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            padding: 1rem 2rem;
+            background-color: white;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Social Links */
+        .social {
+            padding: 4rem 0;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .social-links a {
+            color: #333;
+            font-size: 1.5rem;
+            text-decoration: none;
+            padding: 1rem;
+            border: 2px solid #333;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: #333;
+            color: white;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 0;
+            background-color: #f8f8f8;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            font-weight: 100;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .bio-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .handwritten-note {
+                position: relative;
+                transform: none;
+                margin: 2rem auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#biography">Story</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#press">Press</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <h1>Celine Wanyi</h1>
+            <p class="subtitle">"Every note carries a piece of my journey"</p>
+        </div>
+        <div class="handwritten-note">
+            <p>New single "Whispers" out now - a raw conversation with my younger self</p>
+        </div>
+    </section>
+
+    <section id="biography" class="biography">
+        <div class="container">
+            <div class="bio-content">
+                <div class="bio-image">
+                    <img src="https://via.placeholder.com/400x500/000000/FFFFFF?text=Intimate+Portrait" alt="Celine Wanyi">
+                </div>
+                <div class="bio-text">
+                    <h2>My Story Unfolds</h2>
+                    <p>Born between cultures, raised by melodies, I found my voice in the spaces between languages. My music is a bridge between the girl who left everything behind and the woman who found herself in vulnerability.</p>
+                    
+                    <div class="personal-quote">
+                        "Music became my translator when words weren't enough. Each song is a letter to someone I used to be."
+                    </div>
+                    
+                    <p>From midnight practice sessions in cramped apartments to stages that felt like confessionals, every performance is an invitation into my most honest moments. This is where East meets West, where classical training meets raw emotion, where silence becomes song.</p>
+                    
+                    <p>My multicultural heritage isn't just background—it's the heartbeat of every composition, the reason every melody carries both weight and wings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2>Moments Between Notes</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/400x500/000000/FFFFFF?text=Studio+Moment" alt="Studio">
+                    <div class="story-caption">3am in the studio, when honesty sounds loudest</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/400x500/000000/FFFFFF?text=Performance" alt="Performance">
+                    <div class="story-caption">The moment vulnerability becomes strength</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/400x500/000000/FFFFFF?text=Behind+Scenes" alt="Behind scenes">
+                    <div class="story-caption">Finding myself between sets</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="press" class="press">
+        <div class="container">
+            <h2>Voices That Listen</h2>
+            <div class="press-items">
+                <div class="press-item">
+                    <img src="https://via.placeholder.com/120x80/000000/FFFFFF?text=NPR" alt="NPR">
+                    <p>"Wanyi's voice carries the weight of generations"</p>
+                </div>
+                <div class="press-item">
+                    <img src="https://via.placeholder.com/120x80/000000/FFFFFF?text=Rolling+Stone" alt="Rolling Stone">
+                    <p>"An artist unafraid of her own truth"</p>
+                </div>
+                <div class="press-item">
+                    <img src="https://via.placeholder.com/120x80/000000/FFFFFF?text=Pitchfork" alt="Pitchfork">
+                    <p>"Raw authenticity in every note"</p>
+                </div>
+                <div class="press-item">
+                    <img src="https://via.placeholder.com/120x80/000000/FFFFFF?text=The+Fader" alt="The Fader">
+                    <p>"Music that bridges worlds"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="newsletter" class="newsletter">
+        <div class="container">
+            <h2>Join My Journey</h2>
+            <p>Be the first to hear my stories, from studio confessions to late-night thoughts that become melodies.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit">Listen Along</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="social">
+        <div class="container">
+            <div class="social-links">
+                <a href="#" title="Instagram">IG</a>
+                <a href="#" title="Spotify">SP</a>
+                <a href="#" title="YouTube">YT</a>
+                <a href="#" title="SoundCloud">SC</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Let's Connect</h2>
+            <p>For bookings, collaborations, or if my music moved you<br>
+            <strong>hello@celinewanyi.com</strong></p>
+        </div>
+    </section>
+</body>
+</html>

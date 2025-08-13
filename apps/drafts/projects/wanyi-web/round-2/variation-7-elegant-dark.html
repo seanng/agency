@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celine Wanyi - Elegant Dark</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Smooth fade-in animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/53e5ea32-370c-4417-b9b8-c9c90aa8dff9/CW2.jpg') center/cover;
+            opacity: 0.3;
+            filter: grayscale(50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .artist-name {
+            font-family: 'Lora', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+        }
+
+        .new-release {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 300;
+        }
+
+        .release-title {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-button:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Lora', serif;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 1px;
+            background: #ffffff;
+            margin: 1.5rem auto 0;
+            opacity: 0.5;
+        }
+
+        /* Biography */
+        .bio-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #c0c0c0;
+        }
+
+        .bio-content p {
+            margin-bottom: 2rem;
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 4/5;
+            overflow: hidden;
+            border-radius: 4px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s ease;
+            filter: grayscale(20%);
+        }
+
+        .gallery-item:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+
+        /* Press */
+        .press-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .press-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255,255,255,0.02);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .press-item:hover {
+            background: rgba(255,255,255,0.05);
+            transform: translateY(-5px);
+        }
+
+        .press-publication {
+            font-family: 'Lora', serif;
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .press-quote {
+            font-style: italic;
+            color: #a0a0a0;
+            line-height: 1.7;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: rgba(255,255,255,0.03);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 2rem auto 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #ffffff;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .newsletter-input::placeholder {
+            color: #666;
+        }
+
+        .newsletter-button {
+            padding: 1rem 2rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #ffffff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-button:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        /* Social & Contact */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .social-link {
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-link:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+
+        .contact-info {
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* Scroll animations */
+        .scroll-fade {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .section {
+                padding: 4rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content fade-in">
+            <div class="new-release">New Release</div>
+            <h1 class="artist-name">Celine Wanyi</h1>
+            <div class="release-title">Latest Single Available Now</div>
+            <a href="#" class="cta-button">Listen Now</a>
+        </div>
+    </section>
+
+    <!-- Biography Section -->
+    <section class="section scroll-fade">
+        <h2 class="section-title">Biography</h2>
+        <div class="bio-content">
+            <p>Celine Wanyi is an emerging artist whose ethereal soundscapes and intimate storytelling have captivated audiences worldwide. Her music explores themes of identity, belonging, and the human experience through a uniquely personal lens.</p>
+            <p>Drawing inspiration from both Eastern and Western musical traditions, Celine creates a sound that is both timeless and contemporary, weaving together delicate melodies with profound emotional depth.</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section scroll-fade">
+        <h2 class="section-title">Gallery</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/53e5ea32-370c-4417-b9b8-c9c90aa8dff9/CW2.jpg" alt="Celine Wanyi Portrait">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/4477d9e6-194d-4b6f-8aca-eec5d12c76eb/CW+WAIWY+PRESS+PIC+5.jpeg?format=1000w" alt="Celine Wanyi Press Photo">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/921d8a47-c1e8-40a7-b065-fc3a112c88da/CW+WAIWY+PRESS+PIC+1.jpeg" alt="Celine Wanyi Studio">
+            </div>
+        </div>
+    </section>
+
+    <!-- Press Section -->
+    <section class="section scroll-fade">
+        <h2 class="section-title">Press & Features</h2>
+        <div class="press-grid">
+            <div class="press-item">
+                <div class="press-publication">Music Weekly</div>
+                <div class="press-quote">"An artist who captures the essence of modern vulnerability with stunning grace."</div>
+            </div>
+            <div class="press-item">
+                <div class="press-publication">Indie Sound</div>
+                <div class="press-quote">"Celine Wanyi's music transcends genres, creating something entirely her own."</div>
+            </div>
+            <div class="press-item">
+                <div class="press-publication">Cultural Review</div>
+                <div class="press-quote">"A voice that speaks to the complexities of contemporary identity."</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter scroll-fade">
+        <h2 class="section-title">Stay Connected</h2>
+        <p>Subscribe for updates on new releases, tour dates, and exclusive content.</p>
+        <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+            <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Social & Contact Section -->
+    <section class="section scroll-fade">
+        <div class="social-links">
+            <a href="#" class="social-link" aria-label="Spotify">♪</a>
+            <a href="#" class="social-link" aria-label="Instagram">@</a>
+            <a href="#" class="social-link" aria-label="YouTube">▶</a>
+            <a href="#" class="social-link" aria-label="Email">✉</a>
+        </div>
+        <div class="contact-info">
+            <p>For bookings and inquiries: hello@celinewanyi.com</p>
+            <p>© 2024 Celine Wanyi. All rights reserved.</p>
+        </div>
+    </section>
+
+    <script>
+        // Scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-fade').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth hover effects for gallery
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('mouseover', function() {
+                this.style.transform = 'scale(1.02)';
+            });
+            
+            item.addEventListener('mouseout', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

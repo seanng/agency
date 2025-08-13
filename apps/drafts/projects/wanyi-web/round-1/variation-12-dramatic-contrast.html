@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celine Wanyi - Dramatic Contrast</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section - Dramatic Full Screen */
+        .hero {
+            height: 100vh;
+            position: relative;
+            background: radial-gradient(circle at center, rgba(0,0,0,0.3), rgba(0,0,0,0.8)), 
+                        url('https://via.placeholder.com/1920x1080/000000/FFFFFF?text=CELINE+WANYI+DRAMATIC') center/cover fixed;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 80px;
+            max-width: 50%;
+        }
+
+        .hero .artist-name {
+            font-size: clamp(4rem, 10vw, 12rem);
+            font-weight: 100;
+            line-height: 0.8;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: -0.05em;
+            opacity: 0;
+            animation: slideInLeft 2s ease-out forwards;
+        }
+
+        .hero .release-title {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            border-left: 6px solid #fff;
+            padding-left: 20px;
+            opacity: 0;
+            animation: slideInLeft 2s ease-out 0.5s forwards;
+        }
+
+        .hero .release-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 50px;
+            padding-left: 26px;
+            opacity: 0;
+            animation: slideInLeft 2s ease-out 1s forwards;
+        }
+
+        .hero .cta-container {
+            padding-left: 26px;
+            opacity: 0;
+            animation: slideInLeft 2s ease-out 1.5s forwards;
+        }
+
+        .hero .cta {
+            display: inline-block;
+            padding: 20px 50px;
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .hero .cta:hover::before {
+            left: 0;
+        }
+
+        .hero .cta:hover {
+            color: #fff;
+        }
+
+        /* Biography Section */
+        .biography {
+            padding: 200px 0;
+            background: #fff;
+            color: #000;
+            position: relative;
+        }
+
+        .biography::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to bottom, #000 0%, #333 50%, #fff 100%);
+        }
+
+        .biography-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .biography-header {
+            margin-bottom: 120px;
+            position: relative;
+        }
+
+        .biography h2 {
+            font-size: clamp(6rem, 12vw, 15rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 0.8;
+            opacity: 0.05;
+            position: absolute;
+            top: -100px;
+            left: -20px;
+            z-index: 1;
+        }
+
+        .biography-subtitle {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 100;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+            margin-top: 50px;
+        }
+
+        .biography-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 120px;
+            align-items: start;
+        }
+
+        .biography-text {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .biography-text .lead {
+            font-size: 1.8rem;
+            font-weight: 100;
+            margin-bottom: 50px;
+            line-height: 1.4;
+        }
+
+        .biography-text p {
+            margin-bottom: 40px;
+        }
+
+        .biography-text .quote {
+            font-size: 2rem;
+            font-weight: 600;
+            font-style: italic;
+            color: #000;
+            margin: 60px 0;
+            padding: 40px;
+            background: #f8f8f8;
+            border-left: 8px solid #000;
+            position: relative;
+        }
+
+        .biography-visual {
+            position: relative;
+            height: 800px;
+        }
+
+        .biography-image {
+            width: 100%;
+            height: 70%;
+            background: url('https://via.placeholder.com/600x560/333333/FFFFFF?text=ARTIST+PROFILE') center/cover;
+            position: relative;
+        }
+
+        .biography-accent {
+            position: absolute;
+            bottom: 0;
+            right: -40px;
+            width: 60%;
+            height: 40%;
+            background: #000;
+            z-index: -1;
+        }
+
+        .biography-accent::after {
+            content: 'ARTIST';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(90deg);
+            color: #fff;
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 200px 0;
+            background: #000;
+            position: relative;
+        }
+
+        .gallery-container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .gallery-header {
+            margin-bottom: 150px;
+            text-align: center;
+            position: relative;
+        }
+
+        .gallery h2 {
+            font-size: clamp(5rem, 10vw, 10rem);
+            font-weight: 100;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            position: relative;
+        }
+
+        .gallery h2::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: #fff;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(8, 150px);
+            gap: 20px;
+        }
+
+        .gallery-item {
+            background-size: cover;
+            background-position: center;
+            transition: all 0.6s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 0;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            z-index: 10;
+        }
+
+        .gallery-item:nth-child(1) { 
+            grid-column: span 5;
+            grid-row: span 4;
+            background-image: url('https://via.placeholder.com/750x600/222222/FFFFFF?text=HERO+GALLERY');
+        }
+        .gallery-item:nth-child(2) { 
+            grid-column: span 3;
+            grid-row: span 2;
+            background-image: url('https://via.placeholder.com/450x300/555555/FFFFFF?text=PHOTO+2');
+        }
+        .gallery-item:nth-child(3) { 
+            grid-column: span 4;
+            grid-row: span 3;
+            background-image: url('https://via.placeholder.com/600x450/888888/000000?text=PHOTO+3');
+        }
+        .gallery-item:nth-child(4) { 
+            grid-column: span 3;
+            grid-row: span 2;
+            background-image: url('https://via.placeholder.com/450x300/AAAAAA/000000?text=PHOTO+4');
+        }
+        .gallery-item:nth-child(5) { 
+            grid-column: span 4;
+            grid-row: span 2;
+            background-image: url('https://via.placeholder.com/600x300/666666/FFFFFF?text=PHOTO+5');
+        }
+        .gallery-item:nth-child(6) { 
+            grid-column: span 5;
+            grid-row: span 3;
+            background-image: url('https://via.placeholder.com/750x450/999999/000000?text=WIDE+PHOTO');
+        }
+
+        /* Press Section */
+        .press {
+            padding: 200px 80px;
+            background: #fff;
+            color: #000;
+            position: relative;
+        }
+
+        .press-container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .press-header {
+            margin-bottom: 150px;
+            position: relative;
+        }
+
+        .press h2 {
+            font-size: clamp(4rem, 8vw, 8rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 0.8;
+        }
+
+        .press-intro {
+            font-size: 1.5rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin-top: 40px;
+            line-height: 1.6;
+        }
+
+        .press-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+        }
+
+        .press-featured {
+            background: #000;
+            color: #fff;
+            padding: 80px 60px;
+            position: relative;
+        }
+
+        .press-featured::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 10rem;
+            font-weight: 100;
+            opacity: 0.3;
+        }
+
+        .press-quote-text {
+            font-size: 1.8rem;
+            font-weight: 300;
+            line-height: 1.4;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .press-source {
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .press-logos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .press-logo-item {
+            aspect-ratio: 2/1;
+            background: #f8f8f8 url('https://via.placeholder.com/300x150/F8F8F8/000000?text=PRESS+LOGO') center/contain no-repeat;
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .press-logo-item:hover {
+            background-color: #000;
+            transform: translateY(-5px);
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            padding: 150px 80px;
+            background: #000;
+            color: #fff;
+            position: relative;
+            text-align: center;
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, #fff, #000);
+        }
+
+        .newsletter-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .newsletter h2 {
+            font-size: clamp(4rem, 8vw, 8rem);
+            font-weight: 100;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        .newsletter-tagline {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 80px;
+            line-height: 1.4;
+        }
+
+        .newsletter-form-container {
+            background: #fff;
+            padding: 60px;
+            color: #000;
+            position: relative;
+        }
+
+        .newsletter-form-container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #000, #666, #000);
+            z-index: -1;
+        }
+
+        .newsletter-form {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter input {
+            padding: 25px 30px;
+            border: none;
+            background: #f8f8f8;
+            color: #000;
+            font-size: 1.3rem;
+            outline: none;
+            font-weight: 300;
+        }
+
+        .newsletter button {
+            padding: 25px 40px;
+            background: #000;
+            color: #fff;
+            border: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+
+        .newsletter button:hover {
+            background: #333;
+        }
+
+        /* Social Media Section */
+        .social {
+            padding: 120px 80px;
+            background: #fff;
+            color: #000;
+        }
+
+        .social-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 120px;
+            align-items: center;
+        }
+
+        .social-content h2 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            line-height: 0.9;
+        }
+
+        .social-content p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .social-link {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #000;
+            font-weight: 900;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            border: 3px solid #000;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            transition: top 0.4s ease;
+            z-index: 1;
+        }
+
+        .social-link span {
+            position: relative;
+            z-index: 2;
+            transition: color 0.4s ease;
+        }
+
+        .social-link:hover::before {
+            top: 0;
+        }
+
+        .social-link:hover span {
+            color: #fff;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 200px 80px;
+            background: #000;
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to bottom, #fff, #000);
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact h2 {
+            font-size: clamp(5rem, 10vw, 12rem);
+            font-weight: 100;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            letter-spacing: -0.02em;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 80px;
+            margin-top: 80px;
+        }
+
+        .contact-item h3 {
+            font-size: 1.5rem;
+            font-weight: 100;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 0.1em;
+        }
+
+        .contact-item a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            border-bottom-color: #fff;
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .biography-layout,
+            .press-showcase,
+            .social-container,
+            .contact-info {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(6, 1fr);
+                grid-template-rows: repeat(12, 120px);
+            }
+
+            .gallery-item:nth-child(1) { 
+                grid-column: span 6;
+                grid-row: span 3;
+            }
+            .gallery-item:nth-child(2) { 
+                grid-column: span 3;
+                grid-row: span 2;
+            }
+            .gallery-item:nth-child(3) { 
+                grid-column: span 3;
+                grid-row: span 2;
+            }
+            .gallery-item:nth-child(4) { 
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+            .gallery-item:nth-child(5) { 
+                grid-column: span 4;
+                grid-row: span 2;
+            }
+            .gallery-item:nth-child(6) { 
+                grid-column: span 6;
+                grid-row: span 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                max-width: 90%;
+                padding: 0 40px;
+            }
+
+            .newsletter-form {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(8, 200px);
+            }
+
+            .gallery-item:nth-child(1),
+            .gallery-item:nth-child(6) { 
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="artist-name">Celine<br>Wanyi</h1>
+            <h2 class="release-title">New Release</h2>
+            <p class="release-subtitle">Ethereal Passages - Out Now</p>
+            <div class="cta-container">
+                <a href="#" class="cta">Experience Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Biography Section -->
+    <section class="biography">
+        <div class="biography-container">
+            <div class="biography-header">
+                <h2>Biography</h2>
+                <h3 class="biography-subtitle">Multicultural Sonic Architect</h3>
+            </div>
+            <div class="biography-layout">
+                <div class="biography-text">
+                    <p class="lead">Celine Wanyi stands at the intersection of cultures, creating music that transcends boundaries while honoring diverse traditions.</p>
+                    <p>Her sophisticated approach to composition reflects a deep understanding of both vulnerability and strength, weaving intimate narratives through bold sonic landscapes. Each piece she creates is a testament to the power of multicultural artistry.</p>
+                    <div class="quote">
+                        "I create from a place of authentic cultural fusion, where every influence is honored and transformed into something entirely new."
+                    </div>
+                    <p>Based across multiple continents, Celine's work embodies the contemporary global artist - confident in her vision, vulnerable in her expression, and uncompromising in her artistic integrity.</p>
+                </div>
+                <div class="biography-visual">
+                    <div class="biography-image"></div>
+                    <div class="biography-accent"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <div class="gallery-container">
+            <div class="gallery-header">
+                <h2>Visuals</h2>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+                <div class="gallery-item"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Press Section -->
+    <section class="press">
+        <div class="press-container">
+            <div class="press-header">
+                <h2>Critical<br>Acclaim</h2>
+                <p class="press-intro">Celine Wanyi's groundbreaking artistry has earned recognition from leading cultural institutions and publications worldwide.</p>
+            </div>
+            <div class="press-showcase">
+                <div class="press-featured">
+                    <p class="press-quote-text">A remarkable voice that bridges cultures with stunning sophistication and unwavering authenticity. Wanyi represents the future of contemporary music.</p>
+                    <p class="press-source">International Arts Review</p>
+                </div>
+                <div class="press-logos">
+                    <div class="press-logo-item"></div>
+                    <div class="press-logo-item"></div>
+                    <div class="press-logo-item"></div>
+                    <div class="press-logo-item"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="newsletter-container">
+            <h2>Connect</h2>
+            <p class="newsletter-tagline">Join an exclusive community of music lovers and cultural enthusiasts</p>
+            <div class="newsletter-form-container">
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="social">
+        <div class="social-container">
+            <div class="social-content">
+                <h2>Follow the Journey</h2>
+                <p>Connect with Celine across platforms for behind-the-scenes content, live performances, and exclusive releases.</p>
+            </div>
+            <div class="social-grid">
+                <a href="#" class="social-link">
+                    <span>Instagram</span>
+                </a>
+                <a href="#" class="social-link">
+                    <span>Spotify</span>
+                </a>
+                <a href="#" class="social-link">
+                    <span>Twitter</span>
+                </a>
+                <a href="#" class="social-link">
+                    <span>YouTube</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="contact-container">
+            <h2>Get in Touch</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>Bookings & Press</h3>
+                    <a href="mailto:press@celinewanyi.com">press@celinewanyi.com</a>
+                </div>
+                <div class="contact-item">
+                    <h3>General Inquiries</h3>
+                    <a href="mailto:hello@celinewanyi.com">hello@celinewanyi.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

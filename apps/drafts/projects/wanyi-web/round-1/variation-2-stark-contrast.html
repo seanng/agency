@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celine Wanyi - Artist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.4;
+            color: #000;
+            background: #fff;
+            font-weight: 200;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            z-index: 1000;
+            padding: 30px 0;
+            border-bottom: 1px solid #000;
+        }
+        
+        .logo {
+            font-size: 18px;
+            font-weight: 100;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            color: #fff;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 120px;
+            font-weight: 100;
+            letter-spacing: -4px;
+            margin-bottom: 20px;
+            line-height: 0.9;
+        }
+        
+        .hero .subtitle {
+            font-size: 16px;
+            font-weight: 200;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 80px;
+            opacity: 0.8;
+        }
+        
+        .hero-image {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 400px;
+            opacity: 0.3;
+            transition: opacity 0.5s ease;
+        }
+        
+        .hero-image:hover {
+            opacity: 0.6;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 20px 60px;
+            border: 2px solid #fff;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 100;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .cta-button:hover {
+            background: #fff;
+            color: #000;
+        }
+        
+        /* Biography Section */
+        .biography {
+            padding: 200px 0;
+            background: #fff;
+        }
+        
+        .section-split {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 120px;
+            align-items: center;
+        }
+        
+        .section-title {
+            font-size: 80px;
+            font-weight: 100;
+            line-height: 0.8;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+        
+        .bio-content p {
+            font-size: 24px;
+            margin-bottom: 40px;
+            color: #000;
+            font-weight: 200;
+            line-height: 1.6;
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            background: #000;
+            padding: 200px 0;
+        }
+        
+        .gallery .section-title {
+            color: #fff;
+            text-align: center;
+            writing-mode: horizontal-tb;
+            margin-bottom: 120px;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4px;
+        }
+        
+        .gallery-item {
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+        
+        .gallery-item:nth-child(odd) {
+            transform: translateY(-40px);
+        }
+        
+        .gallery-item:nth-child(even) {
+            transform: translateY(40px);
+        }
+        
+        .gallery-item:nth-child(odd):hover {
+            transform: translateY(-40px) scale(1.02);
+        }
+        
+        .gallery-item:nth-child(even):hover {
+            transform: translateY(40px) scale(1.02);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(120%);
+        }
+        
+        /* Press Section */
+        .press {
+            padding: 200px 0;
+            background: #fff;
+        }
+        
+        .press-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 80px;
+            margin-top: 120px;
+        }
+        
+        .press-item {
+            text-align: center;
+            padding: 60px 40px;
+            border: 1px solid #000;
+            transition: all 0.3s ease;
+        }
+        
+        .press-item:hover {
+            background: #000;
+            color: #fff;
+        }
+        
+        .press-item h3 {
+            font-size: 32px;
+            font-weight: 100;
+            margin-bottom: 20px;
+        }
+        
+        .press-item p {
+            font-size: 14px;
+            font-weight: 200;
+            opacity: 0.7;
+        }
+        
+        /* Newsletter Section */
+        .newsletter {
+            background: #000;
+            color: #fff;
+            padding: 200px 0;
+            text-align: center;
+        }
+        
+        .newsletter .section-title {
+            color: #fff;
+            writing-mode: horizontal-tb;
+            margin-bottom: 80px;
+        }
+        
+        .newsletter-form {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 0;
+            border: 2px solid #fff;
+        }
+        
+        .newsletter-input {
+            padding: 30px 40px;
+            border: none;
+            background: transparent;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 200;
+        }
+        
+        .newsletter-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .newsletter-button {
+            padding: 30px 60px;
+            background: #fff;
+            color: #000;
+            border: none;
+            font-weight: 200;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-button:hover {
+            background: transparent;
+            color: #fff;
+        }
+        
+        /* Social Section */
+        .social {
+            padding: 120px 0;
+            background: #fff;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: space-between;
+            max-width: 800px;
+            margin: 80px auto 0;
+        }
+        
+        .social-link {
+            color: #000;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 200;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .social-link:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #000;
+            transition: width 0.3s ease;
+        }
+        
+        .social-link:hover:after {
+            width: 100%;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background: #000;
+            color: #fff;
+            padding: 200px 0;
+            text-align: center;
+        }
+        
+        .contact .section-title {
+            color: #fff;
+            writing-mode: horizontal-tb;
+            margin-bottom: 80px;
+        }
+        
+        .contact-info {
+            font-size: 24px;
+            font-weight: 200;
+            line-height: 2;
+        }
+        
+        .contact-info a {
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            transition: border-color 0.3s ease;
+        }
+        
+        .contact-info a:hover {
+            border-color: #fff;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            background: #fff;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            font-weight: 200;
+            letter-spacing: 2px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 80px;
+            }
+            
+            .section-split {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            
+            .section-title {
+                writing-mode: horizontal-tb;
+                font-size: 60px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .press-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 30px;
+            }
+            
+            .hero h1 {
+                font-size: 60px;
+            }
+            
+            .hero-image {
+                display: none;
+            }
+            
+            .newsletter-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-links {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Celine Wanyi</div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>NEW<br>MUSIC</h1>
+                <p class="subtitle">Available Everywhere</p>
+                <a href="#" class="cta-button">Stream Now</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://via.placeholder.com/300x400/FFFFFF/000000?text=Artist+Portrait" alt="Celine Wanyi">
+            </div>
+        </div>
+    </section>
+
+    <!-- Biography Section -->
+    <section class="biography">
+        <div class="container">
+            <div class="section-split">
+                <h2 class="section-title">ABOUT</h2>
+                <div class="bio-content">
+                    <p>Celine Wanyi navigates the intersection of vulnerability and strength, creating music that transcends cultural boundaries while remaining deeply personal.</p>
+                    <p>Her artistic vision embraces contradiction—the sophisticated and the raw, the intimate and the universal, the confident and the questioning.</p>
+                    <p>Through stark minimalism and emotional honesty, she constructs sonic spaces where listeners can confront their own complexities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <div class="container">
+            <h2 class="section-title">IMAGERY</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/800x500/000000/FFFFFF?text=Performance+Art" alt="Performance">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/800x500/FFFFFF/000000?text=Studio+Work" alt="Studio">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/800x500/CCCCCC/000000?text=Live+Concert" alt="Concert">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://via.placeholder.com/800x500/000000/FFFFFF?text=Behind+Scenes" alt="Behind Scenes">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Press Section -->
+    <section class="press">
+        <div class="container">
+            <h2 class="section-title">PRESS</h2>
+            <div class="press-grid">
+                <div class="press-item">
+                    <h3>New York Times</h3>
+                    <p>"Haunting and Beautiful"</p>
+                </div>
+                <div class="press-item">
+                    <h3>Rolling Stone</h3>
+                    <p>"Breakthrough Artist"</p>
+                </div>
+                <div class="press-item">
+                    <h3>Pitchfork</h3>
+                    <p>"Essential Listening"</p>
+                </div>
+                <div class="press-item">
+                    <h3>NPR Music</h3>
+                    <p>"Stunning Debut"</p>
+                </div>
+                <div class="press-item">
+                    <h3>The Guardian</h3>
+                    <p>"Captivating Voice"</p>
+                </div>
+                <div class="press-item">
+                    <h3>Billboard</h3>
+                    <p>"Rising Star"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <h2 class="section-title">UPDATES</h2>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                <button type="submit" class="newsletter-button">Join</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Social Section -->
+    <section class="social">
+        <div class="container">
+            <div class="social-links">
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">Spotify</a>
+                <a href="#" class="social-link">Apple Music</a>
+                <a href="#" class="social-link">YouTube</a>
+                <a href="#" class="social-link">Twitter</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <h2 class="section-title">CONTACT</h2>
+            <div class="contact-info">
+                <p>Bookings & Inquiries</p>
+                <p><a href="mailto:management@celinewanyi.com">management@celinewanyi.com</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 CELINE WANYI — ALL RIGHTS RESERVED</p>
+        </div>
+    </footer>
+</body>
+</html>

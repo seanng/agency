@@ -17,9 +17,51 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Agency Template App',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  title: {
+    template: '%s | Agency Template App',
+    default: 'Agency Template App',
+  },
   description:
     'NextJS template with TypeScript, Tailwind CSS, Next Intl, and Payload CMS',
+  keywords: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Next Intl', 'Payload CMS'],
+  authors: [{ name: 'Agency' }],
+  creator: 'Agency',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    alternateLocale: ['es_ES', 'fr_FR'],
+    url: '/',
+    title: 'Agency Template App',
+    description:
+      'NextJS template with TypeScript, Tailwind CSS, Next Intl, and Payload CMS',
+    siteName: 'Agency Template App',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Agency Template App',
+    description:
+      'NextJS template with TypeScript, Tailwind CSS, Next Intl, and Payload CMS',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en': '/',
+      'es': '/es',
+      'fr': '/fr',
+    },
+  },
 };
 
 type Props = {

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Variations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        
+        .base-section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .base-section h2 {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .base-preview {
+            border: 2px solid #4CAF50;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .base-preview iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+        }
+        
+        .base-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+        
+        .base-link:hover {
+            background: #45a049;
+        }
+        
+        .variations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .round-title {
+            grid-column: 1 / -1;
+            color: #666;
+            font-size: 1.3rem;
+            margin-top: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        .variation-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .variation-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .variation-preview {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .variation-preview iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            transform: scale(0.5);
+            transform-origin: top left;
+            pointer-events: none;
+        }
+        
+        .variation-info {
+            padding: 1rem;
+        }
+        
+        .variation-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .variation-link {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            background: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+        
+        .variation-link:hover {
+            background: #1976D2;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Design Variations</h1>
+        
+        <!-- Base Design Section (if exists) -->
+        <div class="base-section" id="base-section" style="display: none;">
+            <h2>Selected Base Design</h2>
+            <div class="base-preview">
+                <iframe src="base.html" id="base-iframe"></iframe>
+            </div>
+            <a href="base.html" target="_blank" class="base-link">Open Base Design →</a>
+        </div>
+        
+        <!-- Variations Grid -->
+        <div class="variations-grid" id="variations-grid">
+            <!-- Variations will be populated here by JavaScript -->
+        </div>
+        
+        <!-- Empty State -->
+        <div class="empty-state" id="empty-state">
+            <h2>No design variations yet</h2>
+            <p>Run the draft-project command to generate designs</p>
+        </div>
+    </div>
+    
+    <script>
+        // This script should be replaced with dynamic content generation
+        // based on actual project structure
+        
+        // Mock data for template - replace with actual file detection
+        const rounds = [
+            {
+                name: 'Round 1',
+                variations: [
+                    // Populate based on actual files in round-1/
+                ]
+            }
+        ];
+        
+        // Check if base.html exists and has content
+        fetch('base.html')
+            .then(response => response.text())
+            .then(content => {
+                if (content && !content.includes('<!-- populate this file')) {
+                    document.getElementById('base-section').style.display = 'block';
+                }
+            })
+            .catch(() => {});
+        
+        // Populate variations grid
+        const grid = document.getElementById('variations-grid');
+        const emptyState = document.getElementById('empty-state');
+        
+        if (rounds.some(r => r.variations.length > 0)) {
+            emptyState.style.display = 'none';
+            
+            rounds.forEach(round => {
+                if (round.variations.length > 0) {
+                    // Add round title
+                    const title = document.createElement('h2');
+                    title.className = 'round-title';
+                    title.textContent = round.name;
+                    grid.appendChild(title);
+                    
+                    // Add variation cards
+                    round.variations.forEach(variation => {
+                        const card = document.createElement('div');
+                        card.className = 'variation-card';
+                        card.innerHTML = `
+                            <div class="variation-preview">
+                                <iframe src="${variation.path}"></iframe>
+                            </div>
+                            <div class="variation-info">
+                                <div class="variation-name">${variation.name}</div>
+                                <a href="${variation.path}" target="_blank" class="variation-link">
+                                    View Full Design →
+                                </a>
+                            </div>
+                        `;
+                        grid.appendChild(card);
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -5,20 +5,50 @@ A Turborepo monorepo for quickly generating client NextJS applications with a co
 ## Tech Stack
 
 Each client app includes:
+
 - **NextJS 15** with App Router and TypeScript
 - **Tailwind CSS v4** for styling
 - **Next Intl** for internationalization (en, es, fr)
 - **Payload CMS** for content management
 - **Shared ESLint and TypeScript configurations**
 
+## How to use
+
+### Step 1: Create Draft
+
+- Create a copy of `ai/draft-project-template.md` -> `ai/<project-name>.md`
+- Project Name naming convention = `<client-name>-<web/app>`
+- Fill out fields. Add examples to `ai/examples/`
+
+### Step 2: Generate Round of Designs
+
+- In Claude Code, ensure you're running the latest Opus model. Run `/gen-round <project-name>`
+
+### Step 3: Choose Base Design
+
+- In the newly created project folder, create a copy of the design you like the most from `apps/<project-name>`.
+- If you don't like any of the designs, go back to Step 2. Be clear about what you didn't like from the existing designs, and what you want to see differently
+- Choose to iterate over 1 landing section at a time, if possible. This makes it easier and designs will be generated faster.
+
+### Step 4: Iterate on Base Design
+
+- Keep iterating on Base Design. Directly or generate multiple if working on it section by section.
+
+### Step 5: Create Project
+
+- Once happy with designs, create a new NextJS project in the apps folder.
+- To do so, open Claude Code and run `/create-project <project-name>`
+
 ## Quick Start
 
 1. **Install dependencies**:
+
    ```bash
    pnpm install
    ```
 
 2. **Create a new client app**:
+
    ```bash
    pnpm create-client my-project-name
    ```
@@ -64,6 +94,7 @@ pnpm create-client acme-corp
 ```
 
 This creates `apps/acme-corp/` with:
+
 - Pre-configured NextJS app
 - Shared ESLint and TypeScript configs
 - Next Intl setup with sample translations
@@ -75,6 +106,7 @@ This creates `apps/acme-corp/` with:
 After creating a new client app:
 
 1. **Configure environment**:
+
    ```bash
    cd apps/your-project-name
    cp .env.example .env
@@ -99,18 +131,24 @@ After creating a new client app:
 ## Shared Packages
 
 ### @agency/eslint-config
+
 Provides consistent linting rules across all apps:
+
 - NextJS and React best practices
 - TypeScript support
 - Prettier integration
 
 ### @agency/typescript-config
+
 Base TypeScript configurations:
+
 - `base.json` - Standard config
 - `nextjs.json` - NextJS-specific settings
 
 ### @agency/shared-utils
+
 Common utilities (expand as needed):
+
 - Currently minimal, ready for growth
 - Add shared functions, constants, types
 

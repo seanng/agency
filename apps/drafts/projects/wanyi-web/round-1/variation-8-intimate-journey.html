@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celine Wanyi - Intimate Journey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fefefe;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://via.placeholder.com/1920x1080/000000/FFFFFF?text=Celine+Eyes+Close-up');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 100;
+            margin-bottom: 2rem;
+            letter-spacing: 5px;
+        }
+
+        .new-release {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .new-release h2 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .new-release p {
+            font-size: 1.1rem;
+            font-style: italic;
+            font-weight: 200;
+        }
+
+        .listen-now {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 3rem;
+            border: 2px solid white;
+            color: white;
+            text-decoration: none;
+            font-weight: 300;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+
+        .listen-now:hover {
+            background: white;
+            color: #000;
+        }
+
+        /* Navigation */
+        nav {
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 3rem;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: 300;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.7;
+        }
+
+        /* Biography Section */
+        .biography {
+            padding: 10rem 0;
+            background: linear-gradient(45deg, #f9f9f9 25%, transparent 25%), 
+                        linear-gradient(-45deg, #f9f9f9 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #f9f9f9 75%), 
+                        linear-gradient(-45deg, transparent 75%, #f9f9f9 75%);
+            background-size: 100px 100px;
+            background-position: 0 0, 0 50px, 50px -50px, -50px 0px;
+        }
+
+        .bio-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .bio-text {
+            order: 2;
+        }
+
+        .bio-text h2 {
+            font-size: 3rem;
+            font-weight: 100;
+            margin-bottom: 3rem;
+            color: #333;
+            line-height: 1.2;
+        }
+
+        .journey-steps {
+            list-style: none;
+        }
+
+        .journey-steps li {
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .journey-steps li:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 8px;
+            height: 8px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        .bio-image-collection {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            order: 1;
+        }
+
+        .bio-image-collection img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.3);
+            border-radius: 10px;
+        }
+
+        .bio-image-collection .main-image {
+            grid-column: span 2;
+            height: 350px;
+        }
+
+        .intimate-note {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 3rem;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #666;
+            border-left: 4px solid #333;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 10rem 0;
+            background-color: #fff;
+        }
+
+        .gallery h2 {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 100;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .gallery-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #666;
+            margin-bottom: 5rem;
+            font-style: italic;
+        }
+
+        .gallery-timeline {
+            position: relative;
+        }
+
+        .gallery-timeline:before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #ddd;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 0 3rem;
+        }
+
+        .timeline-image {
+            flex: 1;
+            padding: 0 3rem;
+        }
+
+        .timeline-image img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.2);
+            border-radius: 15px;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .timeline-content p {
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 2rem;
+            width: 20px;
+            height: 20px;
+            background: #333;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        /* Press Section */
+        .press {
+            padding: 10rem 0;
+            background-color: #f5f5f5;
+        }
+
+        .press h2 {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 100;
+            margin-bottom: 5rem;
+            color: #333;
+        }
+
+        .press-carousel {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 2rem 0;
+        }
+
+        .press-card {
+            min-width: 350px;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .press-card img {
+            width: 100px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 2rem;
+            filter: grayscale(100%);
+        }
+
+        .press-quote {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #333;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .press-source {
+            font-weight: 600;
+            color: #666;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 3rem;
+            font-weight: 100;
+            margin-bottom: 2rem;
+        }
+
+        .newsletter-description {
+            font-size: 1.3rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto 4rem;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            padding: 1.5rem 8rem 1.5rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .newsletter-form button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            bottom: 5px;
+            padding: 0 2rem;
+            background: white;
+            color: #333;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Social Links */
+        .social {
+            padding: 6rem 0;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .social h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .social-card {
+            padding: 2rem;
+            border: 1px solid #eee;
+            border-radius: 15px;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .social-card:hover {
+            border-color: #333;
+            transform: translateY(-5px);
+        }
+
+        .social-card .platform {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-card .description {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 300;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 0;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 3rem;
+            font-weight: 100;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .contact-email {
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            border: 2px solid #333;
+            color: #333;
+            text-decoration: none;
+            font-weight: 400;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .contact-email:hover {
+            background: #333;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .bio-layout {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .bio-text {
+                order: 1;
+            }
+            
+            .bio-image-collection {
+                order: 2;
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-item {
+                flex-direction: column !important;
+            }
+            
+            .timeline-content, .timeline-image {
+                padding: 0;
+            }
+            
+            .gallery-timeline:before {
+                display: none;
+            }
+            
+            .social-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <section id="hero" class="hero">
+        <div class="hero-background"></div>
+        <nav>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#biography">Journey</a></li>
+                <li><a href="#gallery">Moments</a></li>
+                <li><a href="#press">Press</a></li>
+                <li><a href="#contact">Connect</a></li>
+            </ul>
+        </nav>
+        
+        <div class="hero-content">
+            <h1>Celine Wanyi</h1>
+            <div class="new-release">
+                <h2>New Single: "Between Worlds"</h2>
+                <p>A deeply personal exploration of identity, belonging, and the courage to be vulnerable</p>
+                <a href="#" class="listen-now">Listen Now</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="biography" class="biography">
+        <div class="container">
+            <div class="bio-layout">
+                <div class="bio-text">
+                    <h2>The Journey to Myself</h2>
+                    <ul class="journey-steps">
+                        <li><strong>Childhood:</strong> Growing up between languages, finding music as my universal tongue</li>
+                        <li><strong>Discovery:</strong> First time on stage, realizing vulnerability could be strength</li>
+                        <li><strong>Struggle:</strong> Years of trying to fit into boxes that weren't made for me</li>
+                        <li><strong>Breakthrough:</strong> Learning that authenticity resonates louder than perfection</li>
+                        <li><strong>Now:</strong> Creating music that honors every part of my story</li>
+                    </ul>
+                    
+                    <div class="intimate-note">
+                        "Every song is a conversation with different versions of myself - the child who felt displaced, the teenager who found her voice, the woman who learned to embrace complexity."
+                    </div>
+                </div>
+                
+                <div class="bio-image-collection">
+                    <img src="https://via.placeholder.com/400x350/000000/FFFFFF?text=Young+Celine" alt="Young Celine" class="main-image">
+                    <img src="https://via.placeholder.com/200x250/000000/FFFFFF?text=Studio+Life" alt="Studio">
+                    <img src="https://via.placeholder.com/200x250/000000/FFFFFF?text=Performance" alt="Performance">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2>Chapters of Sound</h2>
+            <p class="gallery-subtitle">Visual stories from my musical journey</p>
+            
+            <div class="gallery-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-image">
+                        <img src="https://via.placeholder.com/400x300/000000/FFFFFF?text=First+Song" alt="First song">
+                    </div>
+                    <div class="timeline-content">
+                        <h3>First Song</h3>
+                        <p>Written at 3am in my childhood bedroom, about feeling caught between two cultures. This was the moment I realized music could translate what words couldn't.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-image">
+                        <img src="https://via.placeholder.com/400x300/000000/FFFFFF?text=Recording+Session" alt="Recording">
+                    </div>
+                    <div class="timeline-content">
+                        <h3>First Recording</h3>
+                        <p>Stepping into a professional studio for the first time, nervous hands trembling over the microphone, finding courage in vulnerability.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-image">
+                        <img src="https://via.placeholder.com/400x300/000000/FFFFFF?text=Live+Performance" alt="Live performance">
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Breaking Through</h3>
+                        <p>The performance where everything clicked - where I stopped hiding and started sharing. The audience felt it too.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="press" class="press">
+        <div class="container">
+            <h2>What They're Saying</h2>
+            <div class="press-carousel">
+                <div class="press-card">
+                    <img src="https://via.placeholder.com/100x60/000000/FFFFFF?text=NPR" alt="NPR">
+                    <div class="press-quote">"Wanyi's music doesn't just cross cultural boundaries—it erases them entirely."</div>
+                    <div class="press-source">NPR MUSIC</div>
+                </div>
+                <div class="press-card">
+                    <img src="https://via.placeholder.com/100x60/000000/FFFFFF?text=Rolling+Stone" alt="Rolling Stone">
+                    <div class="press-quote">"An artist who wears her heart on her sleeve and her heritage in her melody."</div>
+                    <div class="press-source">ROLLING STONE</div>
+                </div>
+                <div class="press-card">
+                    <img src="https://via.placeholder.com/100x60/000000/FFFFFF?text=Pitchfork" alt="Pitchfork">
+                    <div class="press-quote">"Raw, honest, and impossibly beautiful—music that feels like a personal letter."</div>
+                    <div class="press-source">PITCHFORK</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="newsletter" class="newsletter">
+        <div class="container">
+            <h2>Join My Inner Circle</h2>
+            <p class="newsletter-description">Get intimate updates, behind-the-scenes stories, and first access to new music. Only the most personal thoughts make it here.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit">Join</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="social">
+        <div class="container">
+            <h2>Follow My Journey</h2>
+            <div class="social-grid">
+                <a href="#" class="social-card">
+                    <div class="platform">Instagram</div>
+                    <div class="description">Daily moments</div>
+                </a>
+                <a href="#" class="social-card">
+                    <div class="platform">Spotify</div>
+                    <div class="description">Latest releases</div>
+                </a>
+                <a href="#" class="social-card">
+                    <div class="platform">YouTube</div>
+                    <div class="description">Music videos</div>
+                </a>
+                <a href="#" class="social-card">
+                    <div class="platform">TikTok</div>
+                    <div class="description">Behind scenes</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2>Let's Create Together</h2>
+                <p>For collaborations, bookings, or if my music touched your soul and you want to share your story with mine.</p>
+                <a href="mailto:hello@celinewanyi.com" class="contact-email">hello@celinewanyi.com</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

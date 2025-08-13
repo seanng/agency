@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celine Wanyi - Refined Motion</title>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0d0d0d;
+            color: #e5e5e5;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Refined motion animations */
+        @keyframes slideInFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes floatUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Particle background effect */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(ellipse at center, #1a1a1a 0%, #0d0d0d 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/4477d9e6-194d-4b6f-8aca-eec5d12c76eb/CW+WAIWY+PRESS+PIC+5.jpeg?format=1000w') center/cover;
+            opacity: 0.2;
+            filter: blur(1px) grayscale(70%);
+            animation: subtlePulse 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes subtlePulse {
+            0% { opacity: 0.2; transform: scale(1); }
+            100% { opacity: 0.25; transform: scale(1.02); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 0.9rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 1.5rem;
+            animation: slideInFromLeft 1s ease-out 0.2s both;
+        }
+
+        .hero-title {
+            font-family: 'PT Serif', serif;
+            font-size: clamp(3.5rem, 10vw, 7rem);
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+            animation: floatUp 1.2s ease-out 0.4s both;
+        }
+
+        .hero-description {
+            font-size: 1.3rem;
+            color: #b0b0b0;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            animation: slideInFromRight 1s ease-out 0.6s both;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(45deg, rgba(255,255,255,0.08), rgba(255,255,255,0.12));
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(20px);
+            animation: floatUp 1s ease-out 0.8s both;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: linear-gradient(45deg, rgba(255,255,255,0.12), rgba(255,255,255,0.18));
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        /* Floating elements */
+        .floating-element {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+        }
+
+        /* Section animations */
+        .section {
+            padding: 8rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-number {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'PT Serif', serif;
+            font-size: 3rem;
+            color: #ffffff;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+            transition: width 0.8s ease;
+        }
+
+        /* Bio section with staggered animations */
+        .bio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .bio-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .bio-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .bio-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .bio-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #c5c5c5;
+        }
+
+        .bio-text p {
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateX(30px);
+            animation: slideInFromRight 0.8s ease-out forwards;
+        }
+
+        .bio-text p:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        /* Gallery with sophisticated hover effects */
+        .gallery-container {
+            position: relative;
+            margin-top: 4rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.1));
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Press section with motion */
+        .press-carousel {
+            display: flex;
+            gap: 3rem;
+            padding: 3rem 0;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .press-card {
+            flex: 0 0 300px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.08);
+            scroll-snap-align: center;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .press-card:hover {
+            transform: translateY(-8px);
+            background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+        }
+
+        .press-logo {
+            font-family: 'PT Serif', serif;
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .press-quote {
+            font-style: italic;
+            color: #b0b0b0;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        .press-quote::before,
+        .press-quote::after {
+            content: '"';
+            font-size: 2rem;
+            color: rgba(255,255,255,0.3);
+            position: absolute;
+        }
+
+        .press-quote::before {
+            top: -10px;
+            left: -20px;
+        }
+
+        .press-quote::after {
+            bottom: -30px;
+            right: -10px;
+        }
+
+        /* Newsletter with motion */
+        .newsletter {
+            background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            margin: 4rem 0;
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+        }
+
+        .newsletter-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .newsletter-form {
+            max-width: 450px;
+            margin: 3rem auto 0;
+            position: relative;
+        }
+
+        .newsletter-input {
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #ffffff;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: rgba(255,255,255,0.3);
+            background: rgba(0,0,0,0.4);
+        }
+
+        .newsletter-submit {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2));
+            border: none;
+            color: #ffffff;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-submit:hover {
+            background: linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.3));
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        /* Social links with refined motion */
+        .social-section {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .social-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .social-link {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .social-link:hover {
+            transform: translateY(-8px) scale(1.1);
+            background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .contact-info {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+        }
+
+        /* Scroll reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal.visible .section-title::after {
+            width: 80px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .bio-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .press-carousel {
+                padding-left: 2rem;
+            }
+            
+            .social-grid {
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Floating elements for ambient effect -->
+        <div class="floating-element" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="floating-element" style="top: 60%; left: 80%; animation-delay: 2s;"></div>
+        <div class="floating-element" style="top: 30%; left: 70%; animation-delay: 4s;"></div>
+        
+        <div class="hero-content">
+            <div class="hero-subtitle">New Single Available</div>
+            <h1 class="hero-title">Celine Wanyi</h1>
+            <div class="hero-description">Ethereal soundscapes meet intimate storytelling</div>
+            <a href="#" class="hero-cta">
+                <span>Experience the Music</span>
+                <span>→</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Biography Section -->
+    <section class="section reveal">
+        <div class="section-header">
+            <div class="section-number">01</div>
+            <h2 class="section-title">About</h2>
+        </div>
+        <div class="bio-grid">
+            <div class="bio-image">
+                <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/53e5ea32-370c-4417-b9b8-c9c90aa8dff9/CW2.jpg" alt="Celine Wanyi">
+            </div>
+            <div class="bio-text">
+                <p>Celine Wanyi crafts music that exists in the liminal spaces between memory and dream, between silence and sound. Her compositions blend traditional elements with contemporary production, creating an atmosphere that is both deeply personal and universally resonant.</p>
+                <p>Born from a multicultural background, her artistry reflects a unique perspective on identity and belonging, weaving narratives that speak to the complexities of modern existence while honoring ancestral wisdom.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section reveal">
+        <div class="section-header">
+            <div class="section-number">02</div>
+            <h2 class="section-title">Visual Stories</h2>
+        </div>
+        <div class="gallery-container">
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/53e5ea32-370c-4417-b9b8-c9c90aa8dff9/CW2.jpg" alt="Celine Wanyi Portrait">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/4477d9e6-194d-4b6f-8aca-eec5d12c76eb/CW+WAIWY+PRESS+PIC+5.jpeg?format=1000w" alt="Celine Wanyi Performance">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.squarespace-cdn.com/content/v1/65f7270bb539b222796a2cfd/921d8a47-c1e8-40a7-b065-fc3a112c88da/CW+WAIWY+PRESS+PIC+1.jpeg" alt="Celine Wanyi Studio">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Press Section -->
+    <section class="section reveal">
+        <div class="section-header">
+            <div class="section-number">03</div>
+            <h2 class="section-title">Critical Acclaim</h2>
+        </div>
+        <div class="press-carousel">
+            <div class="press-card">
+                <div class="press-logo">Pitchfork</div>
+                <div class="press-quote">Wanyi's music exists in a realm entirely her own, where vulnerability becomes strength and silence speaks volumes.</div>
+            </div>
+            <div class="press-card">
+                <div class="press-logo">The Fader</div>
+                <div class="press-quote">An artist who understands that the most profound emotions often live in the spaces between notes.</div>
+            </div>
+            <div class="press-card">
+                <div class="press-logo">NPR Music</div>
+                <div class="press-quote">Celine Wanyi crafts soundscapes that feel both ancient and futuristic, timeless and urgently contemporary.</div>
+            </div>
+            <div class="press-card">
+                <div class="press-logo">Rolling Stone</div>
+                <div class="press-quote">Her voice carries the weight of generations while pointing toward a bold new future for indie music.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter reveal">
+        <div class="newsletter-content">
+            <div class="section-number">04</div>
+            <h2 class="section-title">Stay in Touch</h2>
+            <p style="color: #b0b0b0; margin-top: 1rem;">Be the first to know about new releases, exclusive content, and intimate performances.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                <button type="submit" class="newsletter-submit">Join</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Social & Contact Section -->
+    <section class="social-section reveal">
+        <div class="section-number">05</div>
+        <h2 class="section-title">Connect</h2>
+        <div class="social-grid">
+            <a href="#" class="social-link" title="Spotify">♪</a>
+            <a href="#" class="social-link" title="Instagram">@</a>
+            <a href="#" class="social-link" title="YouTube">▶</a>
+            <a href="#" class="social-link" title="Bandcamp">♫</a>
+            <a href="#" class="social-link" title="Email">✉</a>
+        </div>
+        <div class="contact-info">
+            <p>Management & Bookings: hello@celinewanyi.com</p>
+            <p style="margin-top: 1rem; opacity: 0.6;">© 2024 Celine Wanyi. All rights reserved.</p>
+        </div>
+    </section>
+
+    <script>
+        // Enhanced scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -80px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth parallax effect for hero background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero::before');
+            if (hero && scrolled < window.innerHeight) {
+                document.querySelector('.hero').style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
+        // Enhanced gallery interactions
+        document.querySelectorAll('.gallery-item').forEach((item, index) => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = `translateY(-10px) scale(1.02) rotateY(${Math.random() * 4 - 2}deg)`;
+                this.style.zIndex = 10;
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1) rotateY(0deg)';
+                this.style.zIndex = 1;
+            });
+        });
+
+        // Press carousel smooth scrolling
+        const pressCarousel = document.querySelector('.press-carousel');
+        let isScrolling = false;
+        
+        pressCarousel.addEventListener('wheel', (e) => {
+            if (!isScrolling) {
+                isScrolling = true;
+                pressCarousel.scrollLeft += e.deltaY;
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 50);
+            }
+        });
+
+        // Newsletter form animation
+        const newsletterInput = document.querySelector('.newsletter-input');
+        newsletterInput.addEventListener('focus', function() {
+            this.parentElement.style.transform = 'scale(1.02)';
+        });
+        
+        newsletterInput.addEventListener('blur', function() {
+            this.parentElement.style.transform = 'scale(1)';
+        });
+    </script>
+</body>
+</html>

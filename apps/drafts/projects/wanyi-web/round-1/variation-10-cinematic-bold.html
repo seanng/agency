@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celine Wanyi - Cinematic Bold</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section - Full Screen Cinematic */
+        .hero {
+            height: 100vh;
+            position: relative;
+            background: linear-gradient(45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3)), 
+                        url('https://via.placeholder.com/1920x1080/000000/FFFFFF?text=CELINE+WANYI+HERO') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 100;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out forwards;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2.5rem);
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 0.5s forwards;
+        }
+
+        .hero .cta {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 2px solid #fff;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 2s ease-out 1s forwards;
+        }
+
+        .hero .cta:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* Biography Section */
+        .biography {
+            padding: 120px 50px;
+            background: #fff;
+            color: #000;
+            position: relative;
+        }
+
+        .biography::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to bottom, #000, transparent);
+        }
+
+        .biography-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .biography-text h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 100;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .biography-text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        .biography-image {
+            position: relative;
+            height: 600px;
+            background: url('https://via.placeholder.com/600x600/CCCCCC/000000?text=ARTIST+PORTRAIT') center/cover;
+            box-shadow: -20px 20px 0 #000;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 120px 0;
+            background: #000;
+        }
+
+        .gallery h2 {
+            text-align: center;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 80px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item:nth-child(1) { background-image: url('https://via.placeholder.com/400x400/333333/FFFFFF?text=PHOTO+1'); }
+        .gallery-item:nth-child(2) { background-image: url('https://via.placeholder.com/400x400/666666/FFFFFF?text=PHOTO+2'); }
+        .gallery-item:nth-child(3) { background-image: url('https://via.placeholder.com/400x400/999999/000000?text=PHOTO+3'); }
+        .gallery-item:nth-child(4) { background-image: url('https://via.placeholder.com/400x400/CCCCCC/000000?text=PHOTO+4'); }
+        .gallery-item:nth-child(5) { background-image: url('https://via.placeholder.com/400x400/444444/FFFFFF?text=PHOTO+5'); }
+        .gallery-item:nth-child(6) { background-image: url('https://via.placeholder.com/400x400/777777/FFFFFF?text=PHOTO+6'); }
+
+        /* Press Section */
+        .press {
+            padding: 120px 50px;
+            background: #fff;
+            color: #000;
+        }
+
+        .press-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .press h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 100;
+            margin-bottom: 80px;
+            text-transform: uppercase;
+        }
+
+        .press-logos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            align-items: center;
+        }
+
+        .press-logo {
+            height: 80px;
+            background: #f0f0f0 url('https://via.placeholder.com/200x80/F0F0F0/000000?text=PRESS+LOGO') center/contain no-repeat;
+            transition: opacity 0.3s ease;
+        }
+
+        .press-logo:hover {
+            opacity: 0.7;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            padding: 120px 50px;
+            background: #000;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .newsletter p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0;
+        }
+
+        .newsletter input {
+            flex: 1;
+            padding: 20px;
+            border: none;
+            background: #fff;
+            color: #000;
+            font-size: 1.1rem;
+            outline: none;
+        }
+
+        .newsletter button {
+            padding: 20px 30px;
+            background: #fff;
+            color: #000;
+            border: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter button:hover {
+            background: #ccc;
+        }
+
+        /* Social Media Section */
+        .social {
+            padding: 80px 50px;
+            background: #fff;
+            color: #000;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .social-link {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #000;
+            font-weight: 800;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 120px 50px;
+            background: #000;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 100;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+        }
+
+        .contact p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .contact a {
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 2px solid #fff;
+            padding-bottom: 2px;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact a:hover {
+            opacity: 0.7;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .biography-content {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .press-logos {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .social-links {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Celine Wanyi</h1>
+            <p class="subtitle">New Single Out Now</p>
+            <a href="#" class="cta">Listen Now</a>
+        </div>
+    </section>
+
+    <!-- Biography Section -->
+    <section class="biography">
+        <div class="biography-content">
+            <div class="biography-text">
+                <h2>Artist</h2>
+                <p>Celine Wanyi crafts intimate sonic landscapes that bridge cultures and emotions. Her multicultural artistry weaves vulnerability with confidence, creating music that speaks to the universal human experience.</p>
+                <p>Drawing from diverse cultural influences, Celine's work explores themes of identity, belonging, and artistic expression through a sophisticated lens that challenges and comforts in equal measure.</p>
+            </div>
+            <div class="biography-image"></div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <h2>Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+        </div>
+    </section>
+
+    <!-- Press Section -->
+    <section class="press">
+        <div class="press-content">
+            <h2>Featured In</h2>
+            <div class="press-logos">
+                <div class="press-logo"></div>
+                <div class="press-logo"></div>
+                <div class="press-logo"></div>
+                <div class="press-logo"></div>
+                <div class="press-logo"></div>
+                <div class="press-logo"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <h2>Stay Connected</h2>
+        <p>Get the latest updates on new releases and upcoming shows</p>
+        <form class="newsletter-form">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Social Media Section -->
+    <section class="social">
+        <div class="social-links">
+            <a href="#" class="social-link">IG</a>
+            <a href="#" class="social-link">SP</a>
+            <a href="#" class="social-link">TW</a>
+            <a href="#" class="social-link">YT</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <h2>Contact</h2>
+        <p>For bookings and inquiries:</p>
+        <p><a href="mailto:contact@celinewanyi.com">contact@celinewanyi.com</a></p>
+    </section>
+</body>
+</html>
