@@ -23,28 +23,28 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
   ),
   title: {
-    template: '%s | 极简T恤商店',
-    default: '极简T恤商店 - 纯净美学',
+    template: '%s | 奢华腕表精品店',
+    default: '奢华腕表精品店 - 时间的艺术',
   },
   description:
-    '探索极简主义T恤的纯净美学。精选面料与工艺，呈现纯粹的穿着体验。',
-  keywords: ['极简T恤', '纯净美学', '简约设计', '精选面料', 'T恤商店'],
+    '汇聚世界顶级制表品牌，每一枚腕表都是时间与工艺的完美结晶，演绎腕间的极致奢华。',
+  keywords: ['奢华腕表', '劳力士', '百达翡丽', '爱彼', '欧米茄', '卡地亚', '高级腕表', '瑞士手表'],
   authors: [{ name: 'Ging Mockup Store' }],
   creator: 'Ging Mockup Store',
   openGraph: {
     type: 'website',
     locale: 'zh_CN',
     url: '/',
-    title: '极简T恤商店 - 纯净美学',
+    title: '奢华腕表精品店 - 时间的艺术',
     description:
-      '探索极简主义T恤的纯净美学。精选面料与工艺，呈现纯粹的穿着体验。',
-    siteName: '极简T恤商店',
+      '汇聚世界顶级制表品牌，每一枚腕表都是时间与工艺的完美结晶，演绎腕间的极致奢华。',
+    siteName: '奢华腕表精品店',
   },
   twitter: {
     card: 'summary_large_image',
-    title: '极简T恤商店 - 纯净美学',
+    title: '奢华腕表精品店 - 时间的艺术',
     description:
-      '探索极简主义T恤的纯净美学。精选面料与工艺，呈现纯粹的穿着体验。',
+      '汇聚世界顶级制表品牌，每一枚腕表都是时间与工艺的完美结晶，演绎腕间的极致奢华。',
   },
   robots: {
     index: true,
