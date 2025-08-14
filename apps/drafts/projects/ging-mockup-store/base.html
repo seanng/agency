@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>极简T恤商店 - 侧边导航</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background-color: #ffffff;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        /* Side Navigation - Fixed like Linnas Hotel */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 130px;
+            /* Fixed width - no expansion */
+            height: 100vh;
+            background-color: #fff;
+            border-left: 1px solid #000;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 28px;
+            /* Horizontal padding like Linnas */
+        }
+
+        .sidebar-header {
+            margin-bottom: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 200;
+            color: #000;
+            text-decoration: none;
+            letter-spacing: 2px;
+            display: block;
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            margin-bottom: 10px;
+        }
+
+        .brand-tagline {
+            font-size: 10px;
+            color: #000;
+            font-weight: 300;
+            letter-spacing: 1px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .nav-links li {
+            margin-bottom: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #000;
+            font-weight: 300;
+            font-size: 18px;
+            transition: color 0.3s ease;
+            position: relative;
+            display: block;
+            letter-spacing: 1px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            padding: 8px 0;
+        }
+
+        .nav-links a:hover {
+            color: #000;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover::before {
+            opacity: 1;
+        }
+
+        .cart-section {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cart-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #000;
+            font-size: 18px;
+            font-weight: 300;
+            transition: color 0.3s ease;
+            gap: 10px;
+        }
+
+        .cart-link .cart-icon {
+            font-size: 20px;
+        }
+
+        .cart-link span:last-child {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        .cart-link:hover {
+            color: #000;
+        }
+
+        /* Close button removed for fixed sidebar */
+
+        /* Menu toggle removed for fixed sidebar on desktop */
+
+        /* Main Content */
+        .main-content {
+            margin-right: 130px;
+            /* Account for fixed sidebar */
+            padding: 80px 60px 60px;
+            transition: margin-right 0.3s ease;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero-section {
+            text-align: left;
+            margin-bottom: 100px;
+            padding: 80px 0;
+        }
+
+        .hero-title {
+            font-size: 64px;
+            font-weight: 100;
+            color: #333;
+            margin-bottom: 30px;
+            letter-spacing: 4px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: #666;
+            font-weight: 300;
+            max-width: 500px;
+            letter-spacing: 1px;
+            line-height: 1.8;
+        }
+
+        /* Product Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .product-card {
+            background: #ffffff;
+            overflow: hidden;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: filter 0.3s ease;
+        }
+
+        .product-card:hover .product-image {
+            filter: brightness(1.05);
+        }
+
+        .product-info {
+            padding: 40px 0;
+            text-align: left;
+        }
+
+        .product-title {
+            font-size: 20px;
+            font-weight: 300;
+            color: #333;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .product-price {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .add-to-cart {
+            background-color: transparent;
+            color: #333;
+            border: none;
+            border-bottom: 1px solid #333;
+            padding: 10px 0;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 300;
+            position: relative;
+        }
+
+        .add-to-cart::after {
+            content: '→';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .add-to-cart:hover::after {
+            opacity: 1;
+        }
+
+        .add-to-cart:hover {
+            padding-right: 20px;
+        }
+
+        /* Loading indicator */
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #666;
+            font-size: 16px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* Overlay removed for fixed sidebar */
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-content {
+                padding: 60px 40px;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .products-grid {
+                gap: 40px;
+            }
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #000;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .sidebar {
+                width: 250px;
+                transform: translateX(250px);
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .sidebar .logo,
+            .sidebar .nav-links a,
+            .sidebar .cart-link span:last-child,
+            .sidebar .brand-tagline {
+                writing-mode: horizontal-tb;
+                text-orientation: initial;
+            }
+
+            .main-content {
+                margin-right: 0;
+                padding: 60px 30px 40px;
+            }
+
+            .hero-title {
+                font-size: 36px;
+                letter-spacing: 2px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 30px 20px;
+            }
+
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .products-grid {
+                gap: 30px;
+            }
+
+            .product-info {
+                padding: 30px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+    <!-- Side Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="#" class="logo">极简</a>
+            <p class="brand-tagline">纯净美学</p>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#">产品</a></li>
+        </ul>
+
+        <div class="cart-section">
+            <a href="#" class="cart-link">
+                <span class="cart-icon">🛒</span>
+                <span>购物车</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <h1 class="hero-title">简约<br>至美</h1>
+                <p class="hero-subtitle">每一件T恤都是对简约美学的诠释，<br>精选面料与工艺，呈现纯粹的穿着体验。</p>
+            </section>
+
+            <!-- Products Grid -->
+            <section class="products-grid" id="products-grid">
+                <!-- Products will be loaded here dynamically -->
+            </section>
+
+            <!-- Loading Indicator -->
+            <div class="loading" id="loading" style="display: none;">
+                正在加载更多产品...
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentPage = 1;
+        const productsPerPage = 6;
+        let allProducts = [];
+        let isLoading = false;
+
+        // Mobile sidebar functionality
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function (e) {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.querySelector('.menu-toggle');
+
+            if (window.innerWidth <= 768 &&
+                !sidebar.contains(e.target) &&
+                !toggle.contains(e.target) &&
+                sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+            }
+        });
+
+        // Load products from JSON
+        async function loadProducts() {
+            try {
+                // Embedded products data
+                const productsData = {
+                    "products": [
+                        {
+                            "id": 1,
+                            "title": "经典纯色T恤",
+                            "price": "¥99",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 2,
+                            "title": "街头涂鸦印花T恤",
+                            "price": "¥129",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 3,
+                            "title": "极简主义基础款",
+                            "price": "¥89",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 4,
+                            "title": "复古条纹T恤",
+                            "price": "¥119",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 5,
+                            "title": "潮流字母印花",
+                            "price": "¥139",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 6,
+                            "title": "黑色经典款",
+                            "price": "¥99",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 7,
+                            "title": "艺术图案T恤",
+                            "price": "¥149",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 8,
+                            "title": "运动速干T恤",
+                            "price": "¥159",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 9,
+                            "title": "日系简约款",
+                            "price": "¥109",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 10,
+                            "title": "欧美街头风",
+                            "price": "¥169",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 11,
+                            "title": "纯棉舒适款",
+                            "price": "¥89",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 12,
+                            "title": "限量联名款",
+                            "price": "¥299",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 13,
+                            "title": "渐变色T恤",
+                            "price": "¥139",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 14,
+                            "title": "复古印花款",
+                            "price": "¥129",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 15,
+                            "title": "简约线条设计",
+                            "price": "¥119",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 16,
+                            "title": "嘻哈宽松款",
+                            "price": "¥179",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 17,
+                            "title": "夏季薄款T恤",
+                            "price": "¥79",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 18,
+                            "title": "重磅纯棉T恤",
+                            "price": "¥149",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 19,
+                            "title": "创意图案款",
+                            "price": "¥139",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 20,
+                            "title": "商务休闲T恤",
+                            "price": "¥159",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 21,
+                            "title": "撞色拼接款",
+                            "price": "¥169",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 22,
+                            "title": "口袋装饰T恤",
+                            "price": "¥109",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 23,
+                            "title": "立体刺绣款",
+                            "price": "¥189",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 24,
+                            "title": "环保有机棉",
+                            "price": "¥199",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 25,
+                            "title": "个性定制款",
+                            "price": "¥219",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 26,
+                            "title": "复古做旧T恤",
+                            "price": "¥149",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 27,
+                            "title": "荧光色系列",
+                            "price": "¥139",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 28,
+                            "title": "经典V领款",
+                            "price": "¥99",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 29,
+                            "title": "圆领基础款",
+                            "price": "¥89",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        },
+                        {
+                            "id": 30,
+                            "title": "限定季节款",
+                            "price": "¥259",
+                            "image": "https://placehold.co/300x400/f0f0f0/333333"
+                        }
+                    ]
+                };
+
+                const data = productsData;
+                allProducts = data.products;
+                displayProducts(1);
+                setupInfiniteScroll();
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        }
+
+        // Display products for a specific page
+        function displayProducts(page) {
+            const startIndex = (page - 1) * productsPerPage;
+            const endIndex = startIndex + productsPerPage;
+            const productsToShow = allProducts.slice(startIndex, endIndex);
+
+            const productsGrid = document.getElementById('products-grid');
+
+            productsToShow.forEach(product => {
+                const productCard = createProductCard(product);
+                productsGrid.appendChild(productCard);
+            });
+        }
+
+        // Create product card element
+        function createProductCard(product) {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+                <img src="${product.image}" alt="${product.title}" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">${product.title}</h3>
+                    <p class="product-price">${product.price}</p>
+                    <button class="add-to-cart" onclick="addToCart(${product.id})">加入购物车</button>
+                </div>
+            `;
+            return card;
+        }
+
+        // Add to cart functionality
+        function addToCart(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (product) {
+                alert(`已将 "${product.title}" 加入购物车`);
+            }
+        }
+
+        // Setup infinite scroll
+        function setupInfiniteScroll() {
+            window.addEventListener('scroll', () => {
+                if (isLoading) return;
+
+                const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+                if (scrollTop + clientHeight >= scrollHeight - 100) {
+                    loadMoreProducts();
+                }
+            });
+        }
+
+        // Load more products
+        function loadMoreProducts() {
+            if (isLoading) return;
+
+            const startIndex = currentPage * productsPerPage;
+            if (startIndex >= allProducts.length) return;
+
+            isLoading = true;
+            document.getElementById('loading').style.display = 'block';
+
+            setTimeout(() => {
+                currentPage++;
+                displayProducts(currentPage);
+                document.getElementById('loading').style.display = 'none';
+                isLoading = false;
+            }, 1000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', loadProducts);
+
+        // Close sidebar on escape key (mobile only)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && window.innerWidth <= 768) {
+                const sidebar = document.getElementById('sidebar');
+                sidebar.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+
+</html>

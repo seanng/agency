@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>街头风尚 - 潮流T恤</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(to right, #f1f3f4 0%, #ffffff 50%, #f8f9fa 100%);
+            min-height: 100vh;
+            color: #2d3748;
+            padding-right: 100px;
+        }
+
+        /* Right Side Navigation */
+        .side-navbar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100vh;
+            background: linear-gradient(180deg, #ff6b35 0%, #f7931e 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 0;
+            box-shadow: -5px 0 20px rgba(255, 107, 53, 0.2);
+            z-index: 1000;
+        }
+
+        .logo-side {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .nav-links-side {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links-side a {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 1rem 0.5rem;
+            border-radius: 15px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-links-side a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+            color: white;
+        }
+
+        .cart-side {
+            margin-top: auto;
+            position: relative;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cart-side:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .cart-side-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid white;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem 2rem 2rem 2rem;
+            max-width: 1300px;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(247, 147, 30, 0.05));
+            border-radius: 25px;
+            padding: 4rem 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 107, 53, 0.1);
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 107, 53, 0.03), transparent);
+            animation: slideIn 8s ease-in-out infinite;
+        }
+
+        @keyframes slideIn {
+
+            0%,
+            100% {
+                transform: translateX(100%) rotate(45deg);
+            }
+
+            50% {
+                transform: translateX(-100%) rotate(45deg);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: linear-gradient(45deg, #2d3748, #4a5568);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #718096;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ff6b35;
+            border: 2px solid #ff6b35;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: #ff6b35;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Street Style Elements */
+        .street-elements {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .street-tag {
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid #ff6b35;
+            border-radius: 15px;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #ff6b35;
+            transform: rotate(-5deg);
+        }
+
+        /* Products Section */
+        .products-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #2d3748;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            border-radius: 2px;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-tab {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            background: transparent;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #718096;
+        }
+
+        .filter-tab.active {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            box-shadow: 0 3px 10px rgba(255, 107, 53, 0.3);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px) rotate(1deg);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.15);
+            border-color: #ff6b35;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #f7fafc, #edf2f7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .product-card:hover .product-image::before {
+            left: 100%;
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff6b35;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transform: rotate(15deg);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-category {
+            font-size: 0.8rem;
+            color: #ff6b35;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #ff6b35;
+            margin-bottom: 1rem;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart {
+            flex: 1;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .quick-view {
+            background: white;
+            border: 2px solid #ff6b35;
+            color: #ff6b35;
+            padding: 0.8rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 700;
+        }
+
+        .quick-view:hover {
+            background: #ff6b35;
+            color: white;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.2rem;
+            color: #718096;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #ff6b35;
+            border-top: 3px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 1rem;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1001;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-right: 0;
+            }
+
+            .side-navbar {
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                width: 250px;
+                flex-direction: column;
+                padding: 2rem 1rem;
+            }
+
+            .side-navbar.active {
+                transform: translateX(0);
+            }
+
+            .logo-side {
+                writing-mode: horizontal-tb;
+                text-orientation: unset;
+                margin-bottom: 2rem;
+            }
+
+            .nav-links-side {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav-links-side a {
+                writing-mode: horizontal-tb;
+                text-orientation: unset;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            .mobile-nav-toggle {
+                display: block;
+            }
+
+            .main-content {
+                padding: 5rem 1rem 2rem 1rem;
+            }
+
+            .hero-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .street-elements {
+                display: none;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .filter-tabs {
+                order: 1;
+                align-self: stretch;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Mobile Navigation Toggle -->
+    <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰</button>
+
+    <!-- Right Side Navigation -->
+    <nav class="side-navbar" id="sideNav">
+        <div class="logo-side">街风</div>
+        <ul class="nav-links-side">
+            <li><a href="#brand">品牌</a></li>
+            <li><a href="#home">首页</a></li>
+            <li><a href="#products">产品</a></li>
+        </ul>
+        <div class="cart-side" onclick="showCart()">
+            🛒
+            <span class="cart-side-count">0</span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="street-elements">
+                <span class="street-tag">新品</span>
+                <span class="street-tag">热卖</span>
+            </div>
+            <div class="hero-content">
+                <span class="hero-badge">2024 春季新款</span>
+                <h1 class="hero-title">街头时尚<br>无限可能</h1>
+                <p class="hero-subtitle">探索独特的街头风格，每一件T恤都是你个性的完美表达。从简约到炫酷，找到属于你的那一件。</p>
+                <div class="hero-actions">
+                    <button class="btn-primary">立即购买</button>
+                    <button class="btn-secondary">查看系列</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="products-section">
+            <div class="section-header">
+                <h2 class="section-title">精选产品</h2>
+                <div class="filter-tabs">
+                    <button class="filter-tab active">全部</button>
+                    <button class="filter-tab">新品</button>
+                    <button class="filter-tab">热销</button>
+                    <button class="filter-tab">经典</button>
+                </div>
+            </div>
+            <div class="products-grid" id="products-grid">
+                <!-- Products will be loaded here -->
+            </div>
+            <div class="loading" id="loading" style="display: none;">
+                加载更多产品中...
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let products = [];
+        let displayedProducts = 0;
+        const productsPerLoad = 6;
+        let cartCount = 0;
+
+        // Load products from JSON
+        async function loadProducts() {
+            try {
+                // Embedded products data
+                const productsData = {
+                    "products": [
+                        { "id": 1, "title": "经典纯色T恤", "price": "¥99", "image": "https://placehold.co/300x400/f0f0f0/333333" },
+                        { "id": 2, "title": "街头涂鸦印花T恤", "price": "¥129", "image": "https://placehold.co/300x400/e8e8e8/333333" },
+                        { "id": 3, "title": "极简主义基础款", "price": "¥89", "image": "https://placehold.co/300x400/ffffff/333333" },
+                        { "id": 4, "title": "复古条纹T恤", "price": "¥119", "image": "https://placehold.co/300x400/f5f5f5/333333" },
+                        { "id": 5, "title": "潮流字母印花", "price": "¥139", "image": "https://placehold.co/300x400/fafafa/333333" },
+                        { "id": 6, "title": "黑色经典款", "price": "¥99", "image": "https://placehold.co/300x400/1a1a1a/ffffff" },
+                        { "id": 7, "title": "艺术图案T恤", "price": "¥149", "image": "https://placehold.co/300x400/2a2a2a/ffffff" },
+                        { "id": 8, "title": "运动速干T恤", "price": "¥159", "image": "https://placehold.co/300x400/333333/ffffff" },
+                        { "id": 9, "title": "日系简约款", "price": "¥109", "image": "https://placehold.co/300x400/f0f0f0/333333" },
+                        { "id": 10, "title": "欧美街头风", "price": "¥169", "image": "https://placehold.co/300x400/e0e0e0/333333" },
+                        { "id": 11, "title": "纯棉舒适款", "price": "¥89", "image": "https://placehold.co/300x400/f8f8f8/333333" },
+                        { "id": 12, "title": "限量联名款", "price": "¥299", "image": "https://placehold.co/300x400/1f1f1f/ffffff" },
+                        { "id": 13, "title": "渐变色T恤", "price": "¥139", "image": "https://placehold.co/300x400/3a3a3a/ffffff" },
+                        { "id": 14, "title": "复古印花款", "price": "¥129", "image": "https://placehold.co/300x400/f5f5f5/333333" },
+                        { "id": 15, "title": "简约线条设计", "price": "¥119", "image": "https://placehold.co/300x400/ffffff/333333" },
+                        { "id": 16, "title": "嘻哈宽松款", "price": "¥179", "image": "https://placehold.co/300x400/2d2d2d/ffffff" },
+                        { "id": 17, "title": "夏季薄款T恤", "price": "¥79", "image": "https://placehold.co/300x400/f0f0f0/333333" },
+                        { "id": 18, "title": "重磅纯棉T恤", "price": "¥149", "image": "https://placehold.co/300x400/e8e8e8/333333" },
+                        { "id": 19, "title": "创意图案款", "price": "¥139", "image": "https://placehold.co/300x400/1a1a1a/ffffff" },
+                        { "id": 20, "title": "商务休闲T恤", "price": "¥159", "image": "https://placehold.co/300x400/fafafa/333333" },
+                        { "id": 21, "title": "撞色拼接款", "price": "¥169", "image": "https://placehold.co/300x400/2a2a2a/ffffff" },
+                        { "id": 22, "title": "口袋装饰T恤", "price": "¥109", "image": "https://placehold.co/300x400/f5f5f5/333333" },
+                        { "id": 23, "title": "立体刺绣款", "price": "¥189", "image": "https://placehold.co/300x400/333333/ffffff" },
+                        { "id": 24, "title": "环保有机棉", "price": "¥199", "image": "https://placehold.co/300x400/f0f0f0/333333" },
+                        { "id": 25, "title": "个性定制款", "price": "¥219", "image": "https://placehold.co/300x400/e0e0e0/333333" },
+                        { "id": 26, "title": "复古做旧T恤", "price": "¥149", "image": "https://placehold.co/300x400/1f1f1f/ffffff" },
+                        { "id": 27, "title": "荧光色系列", "price": "¥139", "image": "https://placehold.co/300x400/3a3a3a/ffffff" },
+                        { "id": 28, "title": "经典V领款", "price": "¥99", "image": "https://placehold.co/300x400/f8f8f8/333333" },
+                        { "id": 29, "title": "圆领基础款", "price": "¥89", "image": "https://placehold.co/300x400/ffffff/333333" },
+                        { "id": 30, "title": "限定季节款", "price": "¥259", "image": "https://placehold.co/300x400/2d2d2d/ffffff" }
+                    ]
+                };
+                products = productsData.products;
+                loadMoreProducts();
+            } catch (error) {
+                console.error('加载产品失败:', error);
+                document.getElementById('products-grid').innerHTML = '<p>加载产品失败，请稍后重试。</p>';
+            }
+        }
+
+        // Load more products (infinite scroll)
+        function loadMoreProducts() {
+            const grid = document.getElementById('products-grid');
+            const loading = document.getElementById('loading');
+
+            loading.style.display = 'block';
+
+            setTimeout(() => {
+                const endIndex = Math.min(displayedProducts + productsPerLoad, products.length);
+
+                for (let i = displayedProducts; i < endIndex; i++) {
+                    const product = products[i];
+                    const productCard = createProductCard(product, i);
+                    grid.appendChild(productCard);
+                }
+
+                displayedProducts = endIndex;
+                loading.style.display = 'none';
+
+                if (displayedProducts >= products.length) {
+                    loading.innerHTML = '所有产品已加载完毕';
+                    loading.style.display = 'block';
+                }
+            }, 800);
+        }
+
+        // Create product card
+        function createProductCard(product, index) {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+
+            const tags = ['热销', '新品', '限量', '经典'];
+            const randomTag = tags[index % tags.length];
+
+            card.innerHTML = `
+                <div class="product-image">
+                    👕
+                    <span class="product-tag">${randomTag}</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">街头风格</div>
+                    <h3 class="product-name">${product.name}</h3>
+                    <p class="product-price">¥${product.price}</p>
+                    <div class="product-actions">
+                        <button class="add-to-cart" onclick="addToCart('${product.id}')">
+                            加入购物车
+                        </button>
+                        <button class="quick-view">快速查看</button>
+                    </div>
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Add to cart
+        function addToCart(productId) {
+            cartCount++;
+            document.querySelector('.cart-side-count').textContent = cartCount;
+
+            // Add animation feedback
+            const cartIcon = document.querySelector('.cart-side');
+            cartIcon.style.animation = 'none';
+            setTimeout(() => {
+                cartIcon.style.animation = 'pulse 0.6s ease';
+            }, 10);
+        }
+
+        // Show cart
+        function showCart() {
+            alert(`购物车中有 ${cartCount} 件商品`);
+        }
+
+        // Toggle mobile navigation
+        function toggleMobileNav() {
+            const sideNav = document.getElementById('sideNav');
+            sideNav.classList.toggle('active');
+        }
+
+        // Filter tabs functionality
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+
+        // Infinite scroll
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000) {
+                if (displayedProducts < products.length) {
+                    loadMoreProducts();
+                }
+            }
+        });
+
+        // Close mobile nav on click outside
+        document.addEventListener('click', (e) => {
+            const sideNav = document.getElementById('sideNav');
+            const toggleBtn = document.querySelector('.mobile-nav-toggle');
+
+            if (!sideNav.contains(e.target) && !toggleBtn.contains(e.target)) {
+                sideNav.classList.remove('active');
+            }
+        });
+
+        // Add pulse animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        loadProducts();
+    </script>
+</body>
+
+</html>

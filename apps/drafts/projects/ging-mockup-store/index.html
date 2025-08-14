@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ging Mockup Store - 设计方案展示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .round-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .round-info h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .category-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .variations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .variation-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .variation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .variation-preview {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .variation-preview iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            transform: scale(0.5);
+            transform-origin: top left;
+            width: 200%;
+            height: 200%;
+            pointer-events: none;
+        }
+
+        .variation-info {
+            padding: 20px;
+        }
+
+        .variation-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .variation-description {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .variation-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            padding: 5px 10px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .tag.dark {
+            background: #333;
+            color: white;
+        }
+
+        .tag.light {
+            background: #fafafa;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .tag.trendy {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+        }
+
+        .tag.minimal {
+            background: #f5f5f5;
+            color: #666;
+        }
+
+        .view-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .view-button:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .variations-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Ging Mockup Store</h1>
+            <p class="subtitle">T恤电商平台设计方案 - 第一轮</p>
+        </header>
+
+        <div class="round-info">
+            <h2>设计概览</h2>
+            <p>本轮共生成12个设计方案，探索了不同的品牌个性和视觉风格：</p>
+            <div class="categories">
+                <div class="category-badge">
+                    <strong>品牌风格</strong><br>
+                    潮流年轻 & 简约极简
+                </div>
+                <div class="category-badge">
+                    <strong>配色方案</strong><br>
+                    深色模式 & 浅色清新
+                </div>
+                <div class="category-badge">
+                    <strong>导航样式</strong><br>
+                    顶部导航 & 侧边导航
+                </div>
+                <div class="category-badge">
+                    <strong>语言</strong><br>
+                    简体中文界面
+                </div>
+            </div>
+        </div>
+
+        <div class="variations-grid">
+            <!-- Variation 1 -->
+            <div class="variation-card" onclick="window.open('round-1/variation-1-trendy-dark-top.html', '_blank')">
+                <div class="variation-preview">
+                    <iframe src="round-1/variation-1-trendy-dark-top.html"></iframe>
+                </div>
+                <div class="variation-info">
+                    <h3 class="variation-title">方案1: 潮流深色顶部导航</h3>
+                    <p class="variation-description">街头风格的深色主题，配有经典顶部导航栏，动感十足的渐变效果。</p>
+                    <div class="variation-tags">
+                        <span class="tag dark">深色</span>
+                        <span class="tag trendy">潮流</span>
+                        <span class="tag">顶部导航</span>
+                    </div>
+                    <a href="round-1/variation-1-trendy-dark-top.html" target="_blank" class="view-button">查看完整页面</a>
+                </div>
+            </div>
+
+            <!-- Variation 2 -->
+            <div class="variation-card" onclick="window.open('round-1/variation-2-trendy-dark-side.html', '_blank')">
+                <div class="variation-preview">
+                    <iframe src="round-1/variation-2-trendy-dark-side.html"></iframe>
+                </div>
+                <div class="variation-info">
+                    <h3 class="variation-title">方案2: 潮流深色侧边导航</h3>
+                    <p class="variation-description">创新的右侧导航设计，灵感来自高端酒店网站，3D卡片效果。</p>
+                    <div class="variation-tags">
+                        <span class="tag dark">深色</span>
+                        <span class="tag trendy">潮流</span>
+                        <span class="tag">侧边导航</span>
+                    </div>
+                    <a href="round-1/variation-2-trendy-dark-side.html" target="_blank" class="view-button">查看完整页面</a>
+                </div>
+            </div>
+
+            <!-- Variation 3 -->
+            <div class="variation-card" onclick="window.open('round-1/variation-3-trendy-dark-hybrid.html', '_blank')">
+                <div class="variation-preview">
+                    <iframe src="round-1/variation-3-trendy-dark-hybrid.html"></iframe>
+                </div>
+                <div class="variation-info">
+                    <h3 class="variation-title">方案3: 潮流深色混合导航</h3>
+                    <p class="variation-description">创意混合导航设计，浮动元素和视差滚动效果。</p>
+                    <div class="variation-tags">
+                        <span class="tag dark">深色</span>
+                        <span class="tag trendy">潮流</span>
+                        <span class="tag">创意导航</span>
+                    </div>
+                    <a href="round-1/variation-3-trendy-dark-hybrid.html" target="_blank" class="view-button">查看完整页面</a>
+                </div>
+            </div>
+
+            <!-- Variation 4 -->
+            <div class="variation-card" onclick="window.open('round-1/variation-4-minimal-light-top.html', '_blank')">
+                <div class="variation-preview">
+                    <iframe src="round-1/variation-4-minimal-light-top.html"></iframe>
+                </div>
+                <div class="variation-info">
+                    <h3 class="variation-title">方案4: 极简浅色顶部导航</h3>
+                    <p class="variation-description">超简约设计，大量留白，优雅的下划线悬停效果。</p>
+                    <div class="variation-tags">
+                        <span class="tag light">浅色</span>
+                        <span class="tag minimal">极简</span>
+                        <span class="tag">顶部导航</span>
+                    </div>
+                    <a href="round-1/variation-4-minimal-light-top.html" target="_blank" class="view-button">查看完整页面</a>
+                </div>
+            </div>
+
+            <!-- Variation 5 -->
+            <div class="variation-card" onclick="window.open('round-1/variation-5-minimal-light-side.html', '_blank')">
+                <div class="variation-preview">
+                    <iframe src="round-1/variation-5-minimal-light-side.html"></iframe>
+                </div>
+                <div class="variation-info">
+                    <h3 class="variation-title">方案5: 极简浅色侧边导航</h3>
+                    <p class="variation-description">优雅的右侧滑入式导航，不对称设计强调视觉层次。</p>
+                    <div class="variation-tags">
+                        <span class="tag light">浅色</span>
+                        <span class="tag minimal">极简</span>
+                        <span class="tag">侧边导航</span>
+                    </div>
+                    <a href="round-1/variation-5-minimal-light-side.html" target="_blank" class="view-button">查看完整页面</a>
+                </div>
+            </div>
+
+            <!-- Variation 6 -->
+            <div class="variation-card" onclick="window.open('round-1/variation-6-minimal-light-elegant.html', '_blank')">
+                <div class="variation-preview">
+                    <iframe src="round-1/variation-6-minimal-light-elegant.html"></iframe>
+                </div>
+                <div class="variation-info">
+                    <h3 class="variation-title">方案6: 极简浅色优雅导航</h3>
+                    <p class="variation-description">高端质感设计，渐变背景和精致的排版。</p>
+                    <div class="variation-tags">
+                        <span class="tag light">浅色</span>
+                        <span class="tag minimal">极简</span>
+                        <span class="tag">优雅导航</span>
+                    </div>
+                    <a href="round-1/variation-6-minimal-light-elegant.html" target="_blank" class="view-button">查看完整页面</a>
+                </div>
+            </div>
+
+            <!-- Variation 7 -->
+            <div class="variation-card" onclick="window.open('round-1/variation-7-trendy-light-bold.html', '_blank')">
+                <div class="variation-preview">
+                    <iframe src="round-1/variation-7-trendy-light-bold.html"></iframe>
+                </div>
+                <div class="variation-info">
+                    <h3 class="variation-title">方案7: 潮流浅色大胆设计</h3>
+                    <p class="variation-description">浅色背景搭配鲜艳橙色渐变，街头风格元素。</p>
+                    <div class="variation-tags">
+                        <span class="tag light">浅色</span>
+                        <span class="tag trendy">潮流</span>
+                        <span class="tag">顶部导航</span>
+                    </div>
+                    <a href="round-1/variation-7-trendy-light-bold.html" target="_blank" class="view-button">查看完整页面</a>
+                </div>
+            </div>
+
+            <!-- Variation 8 -->
+            <div class="variation-card" onclick="window.open('round-1/variation-8-trendy-light-side.html', '_blank')">
+                <div class="variation-preview">
+                    <iframe src="round-1/variation-8-trendy-light-side.html"></iframe>
+                </div>
+                <div class="variation-info">
+                    <h3 class="variation-title">方案8: 潮流浅色街头风</h3>
+                    <p class="variation-description">固定右侧导航，垂直文字排版，街头风格标签。</p>
+                    <div class="variation-tags">
+                        <span class="tag light">浅色</span>
+                        <span class="tag trendy">潮流</span>
+                        <span class="tag">侧边导航</span>
+                    </div>
+                    <a href="round-1/variation-8-trendy-light-side.html" target="_blank" class="view-button">查看完整页面</a>
+                </div>
+            </div>
+
+            <!-- Variation 9 -->
+            <div class="variation-card" onclick="window.open('round-1/variation-9-trendy-light-creative.html', '_blank')">
+                <div class="variation-preview">
+                    <iframe src="round-1/variation-9-trendy-light-creative.html"></iframe>
+                </div>
+                <div class="variation-info">
+                    <h3 class="variation-title">方案9: 潮流浅色创意设计</h3>
+                    <p class="variation-description">浮动圆形导航，艺术感十足的动画背景。</p>
+                    <div class="variation-tags">
+                        <span class="tag light">浅色</span>
+                        <span class="tag trendy">潮流</span>
+                        <span class="tag">创意导航</span>
+                    </div>
+                    <a href="round-1/variation-9-trendy-light-creative.html" target="_blank" class="view-button">查看完整页面</a>
+                </div>
+            </div>
+
+            <!-- Variation 10 -->
+            <div class="variation-card" onclick="window.open('round-1/variation-10-minimal-dark-refined.html', '_blank')">
+                <div class="variation-preview">
+                    <iframe src="round-1/variation-10-minimal-dark-refined.html"></iframe>
+                </div>
+                <div class="variation-info">
+                    <h3 class="variation-title">方案10: 极简深色精致设计</h3>
+                    <p class="variation-description">精致的深色主题，玻璃态效果，超轻字体。</p>
+                    <div class="variation-tags">
+                        <span class="tag dark">深色</span>
+                        <span class="tag minimal">极简</span>
+                        <span class="tag">顶部导航</span>
+                    </div>
+                    <a href="round-1/variation-10-minimal-dark-refined.html" target="_blank" class="view-button">查看完整页面</a>
+                </div>
+            </div>
+
+            <!-- Variation 11 -->
+            <div class="variation-card" onclick="window.open('round-1/variation-11-minimal-dark-side.html', '_blank')">
+                <div class="variation-preview">
+                    <iframe src="round-1/variation-11-minimal-dark-side.html"></iframe>
+                </div>
+                <div class="variation-info">
+                    <h3 class="variation-title">方案11: 极简深色优雅侧边</h3>
+                    <p class="variation-description">优雅的渐变背景，流畅的侧边栏动画。</p>
+                    <div class="variation-tags">
+                        <span class="tag dark">深色</span>
+                        <span class="tag minimal">极简</span>
+                        <span class="tag">侧边导航</span>
+                    </div>
+                    <a href="round-1/variation-11-minimal-dark-side.html" target="_blank" class="view-button">查看完整页面</a>
+                </div>
+            </div>
+
+            <!-- Variation 12 -->
+            <div class="variation-card" onclick="window.open('round-1/variation-12-minimal-dark-premium.html', '_blank')">
+                <div class="variation-preview">
+                    <iframe src="round-1/variation-12-minimal-dark-premium.html"></iframe>
+                </div>
+                <div class="variation-info">
+                    <h3 class="variation-title">方案12: 极简深色高端设计</h3>
+                    <p class="variation-description">奢华的渐变背景，高级动画和闪烁效果。</p>
+                    <div class="variation-tags">
+                        <span class="tag dark">深色</span>
+                        <span class="tag minimal">极简</span>
+                        <span class="tag">高端导航</span>
+                    </div>
+                    <a href="round-1/variation-12-minimal-dark-premium.html" target="_blank" class="view-button">查看完整页面</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

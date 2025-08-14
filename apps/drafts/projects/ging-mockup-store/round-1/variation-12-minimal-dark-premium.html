@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>精品T恤商店 - 尊享版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+            color: #f0f0f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Premium Navigation - Hybrid Style */
+        .nav-container {
+            position: relative;
+            z-index: 1000;
+        }
+
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            z-index: 1001;
+        }
+
+        .top-nav-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 1.8rem;
+            font-weight: 100;
+            color: #ffffff;
+            text-decoration: none;
+            letter-spacing: 4px;
+            position: relative;
+        }
+
+        .brand::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, #ffffff, transparent);
+            opacity: 0.3;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .menu-toggle {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .menu-toggle:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 1px;
+            background: #ffffff;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle span::before,
+        .menu-toggle span::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 1px;
+            background: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle span::before {
+            top: -7px;
+        }
+
+        .menu-toggle span::after {
+            top: 7px;
+        }
+
+        .menu-toggle.active span {
+            background: transparent;
+        }
+
+        .menu-toggle.active span::before {
+            transform: rotate(45deg);
+            top: 0;
+        }
+
+        .menu-toggle.active span::after {
+            transform: rotate(-45deg);
+            top: 0;
+        }
+
+        .cart-indicator {
+            position: relative;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            color: #ffffff;
+            font-weight: 300;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cart-indicator:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #333333;
+            color: #ffffff;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Premium Side Menu */
+        .side-menu {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 1000;
+            padding: 6rem 3rem 3rem;
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .side-menu.open {
+            transform: translateX(0);
+        }
+
+        .menu-title {
+            font-size: 1.4rem;
+            font-weight: 200;
+            color: #ffffff;
+            margin-bottom: 3rem;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin-bottom: 3rem;
+        }
+
+        .nav-links li {
+            margin-bottom: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #b8b8b8;
+            font-size: 1.2rem;
+            font-weight: 300;
+            transition: all 0.4s ease;
+            display: block;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            position: relative;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.06), transparent);
+            border-radius: 8px;
+            transition: width 0.4s ease;
+            z-index: -1;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 3rem;
+            transition: margin-right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-content.menu-open {
+            margin-right: 400px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 6rem 0;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+            opacity: 0.3;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 100;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            letter-spacing: 6px;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #999999;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        /* Premium Product Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.6s ease;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.08);
+        }
+
+        .product-info {
+            padding: 2.5rem;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .product-price {
+            font-size: 1.4rem;
+            color: #cccccc;
+            font-weight: 200;
+            margin-bottom: 2rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 1.2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .add-to-cart::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .add-to-cart:hover::before {
+            left: 100%;
+        }
+
+        .add-to-cart:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Loading Indicator */
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: #777777;
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .side-menu {
+                width: 320px;
+            }
+
+            .main-content.menu-open {
+                margin-right: 320px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+                letter-spacing: 3px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+
+            .main-content {
+                padding: 2rem;
+            }
+
+            .top-nav-content {
+                padding: 0 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .side-menu {
+                width: 100%;
+            }
+
+            .main-content.menu-open {
+                margin-right: 0;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+                letter-spacing: 2px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .main-content {
+                padding: 1.5rem;
+            }
+
+            .top-nav-content {
+                padding: 0 1rem;
+            }
+
+            .brand {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="top-nav-content">
+            <a href="#" class="brand">尊品</a>
+            <div class="nav-actions">
+                <div class="cart-indicator" id="cart-indicator">
+                    购物车 <span class="cart-count" id="cart-count">0</span>
+                </div>
+                <div class="menu-toggle" id="menu-toggle">
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Side Menu -->
+    <nav class="side-menu" id="side-menu">
+        <h2 class="menu-title">菜单</h2>
+        <ul class="nav-links">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">品牌故事</a></li>
+            <li><a href="#">产品系列</a></li>
+            <li><a href="#">私人定制</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content" id="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <h1 class="hero-title">奢华T恤系列</h1>
+                <p class="hero-subtitle">精工细作，品味非凡</p>
+            </section>
+
+            <!-- Products Grid -->
+            <div class="products-grid" id="products-grid">
+                <!-- Products will be loaded dynamically -->
+            </div>
+
+            <!-- Loading Indicator -->
+            <div class="loading" id="loading">加载更多产品...</div>
+        </div>
+    </main>
+
+    <script>
+        class PremiumECommerceStore {
+            constructor() {
+                this.products = [];
+                this.displayedProducts = 0;
+                this.productsPerPage = 6;
+                this.cartCount = 0;
+                this.isLoading = false;
+                this.menuOpen = false;
+
+                this.init();
+            }
+
+            async init() {
+                await this.loadProducts();
+                this.setupMenu();
+                this.setupInfiniteScroll();
+                this.displayProducts();
+            }
+
+            async loadProducts() {
+                try {
+
+                    // Embedded products data
+                    const productsData = {
+                        "products": [
+                            {
+                                "id": 1,
+                                "title": "经典纯色T恤",
+                                "price": "¥99",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 2,
+                                "title": "街头涂鸦印花T恤",
+                                "price": "¥129",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 3,
+                                "title": "极简主义基础款",
+                                "price": "¥89",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 4,
+                                "title": "复古条纹T恤",
+                                "price": "¥119",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 5,
+                                "title": "潮流字母印花",
+                                "price": "¥139",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 6,
+                                "title": "黑色经典款",
+                                "price": "¥99",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 7,
+                                "title": "艺术图案T恤",
+                                "price": "¥149",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 8,
+                                "title": "运动速干T恤",
+                                "price": "¥159",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 9,
+                                "title": "日系简约款",
+                                "price": "¥109",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 10,
+                                "title": "欧美街头风",
+                                "price": "¥169",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 11,
+                                "title": "纯棉舒适款",
+                                "price": "¥89",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 12,
+                                "title": "限量联名款",
+                                "price": "¥299",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 13,
+                                "title": "渐变色T恤",
+                                "price": "¥139",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 14,
+                                "title": "复古印花款",
+                                "price": "¥129",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 15,
+                                "title": "简约线条设计",
+                                "price": "¥119",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 16,
+                                "title": "嘻哈宽松款",
+                                "price": "¥179",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 17,
+                                "title": "夏季薄款T恤",
+                                "price": "¥79",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 18,
+                                "title": "重磅纯棉T恤",
+                                "price": "¥149",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 19,
+                                "title": "创意图案款",
+                                "price": "¥139",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 20,
+                                "title": "商务休闲T恤",
+                                "price": "¥159",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 21,
+                                "title": "撞色拼接款",
+                                "price": "¥169",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 22,
+                                "title": "口袋装饰T恤",
+                                "price": "¥109",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 23,
+                                "title": "立体刺绣款",
+                                "price": "¥189",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 24,
+                                "title": "环保有机棉",
+                                "price": "¥199",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 25,
+                                "title": "个性定制款",
+                                "price": "¥219",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 26,
+                                "title": "复古做旧T恤",
+                                "price": "¥149",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 27,
+                                "title": "荧光色系列",
+                                "price": "¥139",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 28,
+                                "title": "经典V领款",
+                                "price": "¥99",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 29,
+                                "title": "圆领基础款",
+                                "price": "¥89",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            },
+                            {
+                                "id": 30,
+                                "title": "限定季节款",
+                                "price": "¥259",
+                                "image": "https://placehold.co/300x400/f0f0f0/333333"
+                            }
+                        ]
+                    };
+
+                    const data = productsData;
+                    this.products = data.products;
+                } catch (error) {
+                    console.error('Failed to load products:', error);
+                }
+            }
+
+            setupMenu() {
+                const toggle = document.getElementById('menu-toggle');
+                const menu = document.getElementById('side-menu');
+                const overlay = document.getElementById('overlay');
+                const mainContent = document.getElementById('main-content');
+
+                toggle.addEventListener('click', () => {
+                    this.toggleMenu();
+                });
+
+                overlay.addEventListener('click', () => {
+                    this.closeMenu();
+                });
+
+                // Close menu on escape key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && this.menuOpen) {
+                        this.closeMenu();
+                    }
+                });
+            }
+
+            toggleMenu() {
+                const toggle = document.getElementById('menu-toggle');
+                const menu = document.getElementById('side-menu');
+                const overlay = document.getElementById('overlay');
+                const mainContent = document.getElementById('main-content');
+
+                this.menuOpen = !this.menuOpen;
+
+                if (this.menuOpen) {
+                    menu.classList.add('open');
+                    overlay.classList.add('active');
+                    mainContent.classList.add('menu-open');
+                    toggle.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    this.closeMenu();
+                }
+            }
+
+            closeMenu() {
+                const toggle = document.getElementById('menu-toggle');
+                const menu = document.getElementById('side-menu');
+                const overlay = document.getElementById('overlay');
+                const mainContent = document.getElementById('main-content');
+
+                this.menuOpen = false;
+                menu.classList.remove('open');
+                overlay.classList.remove('active');
+                mainContent.classList.remove('menu-open');
+                toggle.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            displayProducts() {
+                if (this.isLoading) return;
+                this.isLoading = true;
+
+                const grid = document.getElementById('products-grid');
+                const loading = document.getElementById('loading');
+
+                const start = this.displayedProducts;
+                const end = Math.min(start + this.productsPerPage, this.products.length);
+
+                setTimeout(() => {
+                    for (let i = start; i < end; i++) {
+                        const product = this.products[i];
+                        const productCard = this.createProductCard(product);
+                        grid.appendChild(productCard);
+                    }
+
+                    this.displayedProducts = end;
+
+                    if (this.displayedProducts >= this.products.length) {
+                        loading.textContent = '已显示所有产品';
+                    }
+
+                    this.isLoading = false;
+                }, 800);
+            }
+
+            createProductCard(product) {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.title}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">${product.title}</h3>
+                        <p class="product-price">${product.price}</p>
+                        <button class="add-to-cart" onclick="store.addToCart(${product.id})">
+                            加入购物车
+                        </button>
+                    </div>
+                `;
+
+                return card;
+            }
+
+            addToCart(productId) {
+                this.cartCount++;
+                document.getElementById('cart-count').textContent = this.cartCount;
+
+                // Add premium feedback effect
+                const cartIndicator = document.getElementById('cart-indicator');
+                cartIndicator.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    cartIndicator.style.transform = 'scale(1)';
+                }, 200);
+            }
+
+            setupInfiniteScroll() {
+                window.addEventListener('scroll', () => {
+                    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000) {
+                        if (this.displayedProducts < this.products.length && !this.isLoading) {
+                            this.displayProducts();
+                        }
+                    }
+                });
+            }
+        }
+
+        // Initialize the store
+        const store = new PremiumECommerceStore();
+    </script>
+</body>
+
+</html>
