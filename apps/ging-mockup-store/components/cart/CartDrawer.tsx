@@ -45,21 +45,25 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
   return (
     <>
       {/* Backdrop */}
-      <div 
+      <div
         className={`fixed inset-0 bg-black/50 z-[60] transition-opacity duration-300 ${
           isAnimating ? 'opacity-100' : 'opacity-0'
         }`}
         onClick={onClose}
       />
-      
+
       {/* Drawer */}
-      <div className={`fixed right-0 top-0 h-full w-[400px] max-w-[90vw] bg-white z-[70] shadow-xl transition-transform duration-300 ease-out ${
-        isAnimating ? 'translate-x-0' : 'translate-x-full'
-      }`}>
+      <div
+        className={`fixed right-0 top-0 h-full w-[400px] max-w-[90vw] bg-white z-[70] shadow-xl transition-transform duration-300 ease-out ${
+          isAnimating ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex justify-between items-center p-6 border-b">
-            <h2 className="text-2xl font-light tracking-wide">{t('navigation.cart')}</h2>
+            <h2 className="text-2xl font-light tracking-wide">
+              {t('navigation.cart')}
+            </h2>
             <button
               onClick={onClose}
               className="text-3xl hover:opacity-60 transition-opacity p-1 -m-1"
@@ -67,7 +71,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               ×
             </button>
           </div>
-          
+
           {/* Cart Items */}
           <div className="flex-1 overflow-y-auto p-6">
             {isEmpty ? (
@@ -75,8 +79,8 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
             ) : (
               <div className="space-y-4">
                 {items.map((item, index) => (
-                  <div 
-                    key={item.id} 
+                  <div
+                    key={item.id}
                     className="flex gap-4 pb-4 border-b animate-fadeIn"
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
@@ -91,18 +95,30 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                     </div>
                     <div className="flex-1">
                       <h3 className="font-light mb-1">{item.name}</h3>
-                      <p className="text-gray-600 text-sm mb-2">¥{item.price}</p>
+                      <p className="text-gray-600 text-sm mb-2">
+                        ¥{item.price}
+                      </p>
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => updateItemQuantity(item.id, (item.quantity || 1) - 1)}
-                          className="w-6 h-6 border border-gray-300 hover:bg-gray-100 transition-colors"
+                          onClick={() =>
+                            updateItemQuantity(
+                              item.id,
+                              (item.quantity || 1) - 1
+                            )
+                          }
+                          className="flex items-center justify-center w-6 h-6 border border-gray-300 hover:bg-gray-100 transition-colors"
                         >
                           -
                         </button>
                         <span className="w-8 text-center">{item.quantity}</span>
                         <button
-                          onClick={() => updateItemQuantity(item.id, (item.quantity || 1) + 1)}
-                          className="w-6 h-6 border border-gray-300 hover:bg-gray-100 transition-colors"
+                          onClick={() =>
+                            updateItemQuantity(
+                              item.id,
+                              (item.quantity || 1) + 1
+                            )
+                          }
+                          className="flex items-center justify-center w-6 h-6 border border-gray-300 hover:bg-gray-100 transition-colors"
                         >
                           +
                         </button>
@@ -119,13 +135,15 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               </div>
             )}
           </div>
-          
+
           {/* Footer */}
           {!isEmpty && (
             <div className="border-t p-6">
               <div className="flex justify-between mb-4">
                 <span className="text-lg">合计</span>
-                <span className="text-lg font-medium">¥{cartTotal.toFixed(2)}</span>
+                <span className="text-lg font-medium">
+                  ¥{cartTotal.toFixed(2)}
+                </span>
               </div>
               <button className="w-full bg-black text-white py-3 hover:bg-gray-800 transition-all duration-200 hover:shadow-lg">
                 结算

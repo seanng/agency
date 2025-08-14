@@ -25,15 +25,18 @@ export default function ProductCard({
 
   const handleAddToCart = () => {
     setIsAdding(true);
-    
+
     // Add item to cart with proper structure
-    addItem({
-      id: id.toString(),
-      name: title,
-      price: parseFloat(price.replace('¥', '')),
-      image: image,
-    }, 1);
-    
+    addItem(
+      {
+        id: id.toString(),
+        name: title,
+        price: parseFloat(price.replace('¥', '')),
+        image: image,
+      },
+      1
+    );
+
     // Show success message
     setShowAddedMessage(true);
     setTimeout(() => {
@@ -55,7 +58,7 @@ export default function ProductCard({
         />
       </div>
       <div className="py-10 text-left">
-        <h3 className="text-xl font-light text-gray-800 mb-[15px] tracking-[1px]">
+        <h3 className="text-xl font-light text-gray-800 mb-[15px] tracking-[1px] line-clamp-2 min-h-[3.5rem]">
           {title}
         </h3>
         <p className="text-lg text-gray-600 mb-[30px] font-light">{price}</p>
@@ -67,7 +70,7 @@ export default function ProductCard({
           {isAdding ? '...' : t('addToCart')}
         </button>
       </div>
-      
+
       {/* Success message overlay */}
       {showAddedMessage && (
         <div className="absolute inset-0 bg-black/80 flex items-center justify-center transition-opacity duration-300">

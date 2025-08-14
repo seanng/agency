@@ -56,11 +56,6 @@ export default function Sidebar() {
                 </span>
               )}
             </div>
-            <span
-              style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
-            >
-              {t('navigation.cart')}
-            </span>
           </button>
         </div>
       </nav>
