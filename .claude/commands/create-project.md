@@ -40,6 +40,7 @@ Based on base.html analysis, suggest Payload CMS collections:
 
 2. **Theme Features**
    - Include light/dark mode toggle? (Yes/No)
+     - If yes, use next-themes package.
    - Additional color themes beyond the design? (Yes/No)
 
 3. **Analytics**

@@ -298,46 +298,68 @@
         /* Mobile Menu Toggle */
         .menu-toggle {
             display: none;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #000;
-            border: none;
-            color: #fff;
-            font-size: 24px;
-            width: 40px;
-            height: 40px;
-            border-radius: 4px;
-            cursor: pointer;
-            z-index: 1001;
         }
 
         @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-
+            /* Hide desktop sidebar */
             .sidebar {
-                width: 250px;
-                transform: translateX(250px);
-                transition: transform 0.3s ease;
+                display: none !important;
             }
 
-            .sidebar.open {
-                transform: translateX(0);
+            /* Mobile bottom navbar */
+            .mobile-navbar {
+                display: flex !important;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 70px;
+                background-color: #fff;
+                border-top: 1px solid #000;
+                z-index: 1000;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 20px;
             }
 
-            .sidebar .logo,
-            .sidebar .nav-links a,
-            .sidebar .cart-link span:last-child,
-            .sidebar .brand-tagline {
+            .mobile-navbar-left {
+                display: flex;
+                align-items: baseline;
+                gap: 30px;
+            }
+
+            .mobile-navbar .logo {
+                font-size: 18px;
+                font-weight: 200;
+                color: #000;
+                text-decoration: none;
+                letter-spacing: 2px;
                 writing-mode: horizontal-tb;
-                text-orientation: initial;
+            }
+
+            .mobile-navbar .nav-link {
+                text-decoration: none;
+                color: #000;
+                font-weight: 300;
+                font-size: 16px;
+                letter-spacing: 1px;
+            }
+
+            .mobile-navbar .cart-link {
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                color: #000;
+                font-size: 20px;
+            }
+
+            .mobile-navbar .cart-text {
+                display: none;
             }
 
             .main-content {
                 margin-right: 0;
-                padding: 60px 30px 40px;
+                padding: 60px 30px 90px; /* Added bottom padding for fixed navbar */
             }
 
             .hero-title {
@@ -356,9 +378,14 @@
 
         }
 
+        /* Hide mobile navbar on desktop */
+        .mobile-navbar {
+            display: none;
+        }
+
         @media (max-width: 480px) {
             .main-content {
-                padding: 30px 20px;
+                padding: 30px 20px 90px; /* Added bottom padding for fixed navbar */
             }
 
             .hero-title {
@@ -381,9 +408,6 @@
 </head>
 
 <body>
-    <!-- Mobile Menu Toggle -->
-    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
-
     <!-- Side Navigation -->
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -401,6 +425,18 @@
                 <span>购物车</span>
             </a>
         </div>
+    </nav>
+
+    <!-- Mobile Bottom Navbar -->
+    <nav class="mobile-navbar">
+        <div class="mobile-navbar-left">
+            <a href="#" class="logo">极简</a>
+            <a href="#" class="nav-link">产品</a>
+        </div>
+        <a href="#" class="cart-link">
+            <span class="cart-icon">🛒</span>
+            <span class="cart-text">购物车</span>
+        </a>
     </nav>
 
     <!-- Main Content -->
@@ -430,24 +466,6 @@
         let allProducts = [];
         let isLoading = false;
 
-        // Mobile sidebar functionality
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('open');
-        }
-
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', function (e) {
-            const sidebar = document.getElementById('sidebar');
-            const toggle = document.querySelector('.menu-toggle');
-
-            if (window.innerWidth <= 768 &&
-                !sidebar.contains(e.target) &&
-                !toggle.contains(e.target) &&
-                sidebar.classList.contains('open')) {
-                sidebar.classList.remove('open');
-            }
-        });
 
         // Load products from JSON
         async function loadProducts() {
@@ -716,14 +734,6 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', loadProducts);
-
-        // Close sidebar on escape key (mobile only)
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && window.innerWidth <= 768) {
-                const sidebar = document.getElementById('sidebar');
-                sidebar.classList.remove('open');
-            }
-        });
     </script>
 </body>
 

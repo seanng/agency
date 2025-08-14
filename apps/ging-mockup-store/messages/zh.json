@@ -1,0 +1,55 @@
+{
+  "site": {
+    "title": "极简T恤商店",
+    "tagline": "纯净美学",
+    "description": "每一件T恤都是对简约美学的诠释，精选面料与工艺，呈现纯粹的穿着体验。"
+  },
+  "navigation": {
+    "products": "产品",
+    "cart": "购物车"
+  },
+  "hero": {
+    "title": "简约至美",
+    "subtitle": "每一件T恤都是对简约美学的诠释，精选面料与工艺，呈现纯粹的穿着体验。"
+  },
+  "products": {
+    "loading": "正在加载更多产品...",
+    "addToCart": "加入购物车",
+    "addedToCart": "已将 \"{productName}\" 加入购物车",
+    "classicTee": "经典纯色T恤",
+    "streetGraffiti": "街头涂鸦印花T恤",
+    "minimalist": "极简主义基础款",
+    "retroStripe": "复古条纹T恤",
+    "trendyLetter": "潮流字母印花",
+    "blackClassic": "黑色经典款",
+    "artPattern": "艺术图案T恤",
+    "sportQuickDry": "运动速干T恤",
+    "japaneseMinimal": "日系简约款",
+    "westernStreet": "欧美街头风",
+    "pureCotton": "纯棉舒适款",
+    "limitedEdition": "限量联名款",
+    "gradient": "渐变色T恤",
+    "retroPrint": "复古印花款",
+    "simpleLines": "简约线条设计",
+    "hiphopLoose": "嘻哈宽松款",
+    "summerThin": "夏季薄款T恤",
+    "heavyCotton": "重磅纯棉T恤",
+    "creativePattern": "创意图案款",
+    "businessCasual": "商务休闲T恤",
+    "colorBlock": "撞色拼接款",
+    "pocketDetail": "口袋装饰T恤",
+    "embroidered": "立体刺绣款",
+    "organicCotton": "环保有机棉",
+    "customized": "个性定制款",
+    "vintageWashed": "复古做旧T恤",
+    "fluorescent": "荧光色系列",
+    "classicVNeck": "经典V领款",
+    "roundNeck": "圆领基础款",
+    "limitedSeason": "限定季节款"
+  },
+  "seo": {
+    "defaultTitle": "极简T恤商店 - 纯净美学",
+    "defaultDescription": "探索极简主义T恤的纯净美学。精选面料与工艺，呈现纯粹的穿着体验。",
+    "defaultKeywords": "极简T恤,纯净美学,简约设计,精选面料,T恤商店"
+  }
+}
